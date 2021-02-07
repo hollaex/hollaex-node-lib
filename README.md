@@ -7,15 +7,15 @@ Nodejs library for HollaEx Kit enabled exchanges.
 ## Usage
 
 ```javascript
-const { Kit } = require('hollaex-node-lib');
+const kit = require('hollaex-node-lib');
 
-const client = new Kit();
+const client = new kit();
 ```
 
 You can pass the `apiURL` and `baseURL` of the HollaEx-Enabled exchange to connect to. You can also pass your `apiKey` and `apiSecret` generated from the HollaEx-Enabled exchange.
 
 ```javascript
-const client = new Kit({
+const client = new kit({
 	apiURL: '<EXCHANGE_API_URL>',
 	baseURL: '<EXCHANGE_BASE_URL>',
 	apiKey: '<MY_API_KEY>',
@@ -45,7 +45,7 @@ client
 	});
 
 client
-	.getTrades({ symbol: 'xht-usdt' })
+	.getTrade({ symbol: 'xht-usdt' })
 	.then((res) => {
 		console.log('Public trades: ', res);
 	})
@@ -66,7 +66,7 @@ client
 | `getTickers`        |                                                                                                                                                                                                                                                                                                                                                            | Last, high, low, open and close price and volume within the last 24 hours for all symbols                                                                              |
 | `getOrderbook`      | **symbol**                                                                                                                                                                                                                                                                                                                                                 | Orderbook containing list of bids and asks                                                                                                                             |
 | `getOrderbooks`     |                                                                                                                                                                                                                                                                                                                                                            | Orderbook containing list of bids and asks for all symbols                                                                                                             |
-| `getTrades`         | **symbol** (_optional_)                                                                                                                                                                                                                                                                                                                                    | List of last trades                                                                                                                                                    |
+| `getTrade`         | **symbol** (_optional_)                                                                                                                                                                                                                                                                                                                                    | List of last trades                                                                                                                                                    |
 | `getUser`           |                                                                                                                                                                                                                                                                                                                                                            | User's personal information                                                                                                                                            |
 | `getBalance`        |                                                                                                                                                                                                                                                                                                                                                            | User's wallet balance                                                                                                                                                  |
 | `getDeposits`       | **currency** (_optional_), **limit** (_optional_, _default_=`50`, _max_=`100`), **page** (_optional_, _default_=`1`), **orderBy** (_optional_, _default_=`id`), **order** (_optional_, _default_=`asc`, `asc` or `desc`), **startDate** (_optional_, _default_=`0`, _format_=`ISO8601`), **endDate** (_optional_, _default_=`NOW`, _format_=`ISO8601`)     | User's list of all deposits                                                                                                                                            |
