@@ -12,6 +12,9 @@
 		"linebreak-style": ["error", "unix"],
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"],
+		"indent": ["error", "tab"],
+		"arrow-parens": ["error", "always"],
+		"object-curly-spacing": ["error", "always"],
 		"no-console": 0
 	}
 }
