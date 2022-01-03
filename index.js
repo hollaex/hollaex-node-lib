@@ -2,6 +2,11 @@
 
 const Kit = require('./kit');
 
-module.exports = {
-	Kit
-};
+// To maintain backwards compatibility for `const { Kit } = require("hollaex-node-lib")`
+class BackwardsCompatibleKit extends Kit {
+    static get Kit() {
+        return Kit;
+    }
+}
+
+module.exports = BackwardsCompatibleKit;
