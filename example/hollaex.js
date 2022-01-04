@@ -7,8 +7,8 @@ const client = new HollaEx({ apiKey: API_KEY, apiSecret: API_SECRET });
 
 client
 	.getTicker('xht-usdt')
-	.then((res) => {
-		let data = JSON.parse(res);
+	.then((data) => {
+		console.log(data);
 		console.log('The volume is', data.volume);
 	})
 	.catch((err) => {
@@ -22,24 +22,15 @@ client
 	symbols : xht-usdt
 */
 
-const socket1 = client.connect('trades:xht-usdt');
+client.connect(['orderbook']);
 
-socket1.on('trades', (data) => {
+client.ws.on('message', (data) => {
+	data = JSON.parse(data);
 	console.log(data);
 });
 
-const socket2 = client.connect('all');
-
-socket2.on('orderbook', (data) => {
-	console.log(data);
-});
-
-// You have to use a token to use these  otherwise the socket disconnects
-socket2.on('userInfo', (data) => {
-	console.log(data);
-});
 
 
 setTimeout(() => {
-	socket2.disconnect();
-}, 5000);
+	client.disconnect();
+}, 10000);

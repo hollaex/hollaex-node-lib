@@ -4,7 +4,8 @@ const WebSocket = require('ws');
 const moment = require('moment');
 const { createRequest, createSignature, generateHeaders, isDatetime, sanitizeDate } = require('./utils');
 const { setWsHeartbeat } = require('ws-heartbeat/client');
-const { each, union, isNumber, isString, isPlainObject, isBoolean, isDate } = require('lodash');
+const { each, union, isNumber, isString, isPlainObject, isBoolean } = require('lodash');
+
 class HollaExKit {
 	constructor(
 		opts = {
