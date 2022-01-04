@@ -1,9 +1,12 @@
 'use strict';
 
 const Kit = require('./kit');
-const Network = require('./network');
 
-module.exports = {
-	Kit,
-	Network
-};
+// To maintain backwards compatibility for `const { Kit } = require("hollaex-node-lib")`
+class BackwardsCompatibleKit extends Kit {
+    static get Kit() {
+        return Kit;
+    }
+}
+
+module.exports = BackwardsCompatibleKit;
