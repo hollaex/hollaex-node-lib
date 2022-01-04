@@ -2,20 +2,20 @@
 
 Nodejs library for HollaEx Kit enabled exchanges.
 
-**This documentation is specifically for using this library to connect to HollaEx Kit enabled exchanges. If you are an exchange operator and would like to use this library for the HollaEx Network, [click here](NETWORK_README.md)**
+**This library is specifically for end users and traders to connect to HollaEx Kit exchanges. It connects to [HollaEx Pro](https://pro.hollaex.com/trade/xht-usdt) by default.**
 
 ## Usage
 
 ```javascript
-const { Kit } = require('hollaex-node-lib');
+const hollaex = require('hollaex-node-lib');
 
-const client = new Kit();
+const client = new hollaex();
 ```
 
 You can pass the `apiURL` and `baseURL` of the HollaEx-Enabled exchange to connect to. You can also pass your `apiKey` and `apiSecret` generated from the HollaEx-Enabled exchange.
 
 ```javascript
-const client = new Kit({
+const client = new hollaex({
 	apiURL: '<EXCHANGE_API_URL>',
 	baseURL: '<EXCHANGE_BASE_URL>',
 	apiKey: '<MY_API_KEY>',
@@ -28,7 +28,7 @@ You can also pass the field `apiExpiresAfter` which is the length of time in sec
 ### Example:
 
 ```javascript
-const client = new Kit({
+const client = new hollaex({
 	apiURL: '<EXCHANGE_API_URL>',
 	baseURL: '<EXCHANGE_BASE_URL>',
 	apiKey: '<MY_API_KEY>',
