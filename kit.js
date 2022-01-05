@@ -5,7 +5,6 @@ const moment = require('moment');
 const { createRequest, createSignature, generateHeaders, isDatetime, sanitizeDate } = require('./utils');
 const { setWsHeartbeat } = require('ws-heartbeat/client');
 const { each, union, isNumber, isString, isPlainObject, isBoolean } = require('lodash');
-
 class HollaExKit {
 	constructor(
 		opts = {
@@ -791,38 +790,21 @@ class HollaExKit {
 				if (!this.wsEvents.includes(event) || this.initialConnection) {
 					const [topic, symbol] = event.split(':');
 					switch (topic) {
-						case 'orderbook':
-						case 'trade':
-							if (symbol) {
-								if (!this.wsEvents.includes(topic)) {
-									this.ws.send(
-										JSON.stringify({
-											op: 'subscribe',
-											args: [`${topic}:${symbol}`]
-										})
-									);
-									if (!this.initialConnection) {
-										this.wsEvents = union(this.wsEvents, [event]);
-									}
-								}
-							} else {
+					case 'orderbook':
+					case 'trade':
+						if (symbol) {
+							if (!this.wsEvents.includes(topic)) {
 								this.ws.send(
 									JSON.stringify({
 										op: 'subscribe',
-										args: [topic]
+										args: [`${topic}:${symbol}`]
 									})
 								);
 								if (!this.initialConnection) {
-									this.wsEvents = this.wsEvents.filter(
-										(e) => !e.includes(`${topic}:`)
-									);
 									this.wsEvents = union(this.wsEvents, [event]);
 								}
 							}
-							break;
-						case 'order':
-						case 'wallet':
-						case 'deposit':
+						} else {
 							this.ws.send(
 								JSON.stringify({
 									op: 'subscribe',
@@ -830,11 +812,28 @@ class HollaExKit {
 								})
 							);
 							if (!this.initialConnection) {
+								this.wsEvents = this.wsEvents.filter(
+									(e) => !e.includes(`${topic}:`)
+								);
 								this.wsEvents = union(this.wsEvents, [event]);
 							}
-							break;
-						default:
-							break;
+						}
+						break;
+					case 'order':
+					case 'wallet':
+					case 'deposit':
+						this.ws.send(
+							JSON.stringify({
+								op: 'subscribe',
+								args: [topic]
+							})
+						);
+						if (!this.initialConnection) {
+							this.wsEvents = union(this.wsEvents, [event]);
+						}
+						break;
+					default:
+						break;
 					}
 				}
 			});
@@ -853,38 +852,38 @@ class HollaExKit {
 				if (this.wsEvents.includes(event)) {
 					const [topic, symbol] = event.split(':');
 					switch (topic) {
-						case 'orderbook':
-						case 'trade':
-							if (symbol) {
-								this.ws.send(
-									JSON.stringify({
-										op: 'unsubscribe',
-										args: [`${topic}:${symbol}`]
-									})
-								);
-							} else {
-								this.ws.send(
-									JSON.stringify({
-										op: 'unsubscribe',
-										args: [topic]
-									})
-								);
-							}
-							this.wsEvents = this.wsEvents.filter((e) => e !== event);
-							break;
-						case 'order':
-						case 'wallet':
-						case 'deposit':
+					case 'orderbook':
+					case 'trade':
+						if (symbol) {
+							this.ws.send(
+								JSON.stringify({
+									op: 'unsubscribe',
+									args: [`${topic}:${symbol}`]
+								})
+							);
+						} else {
 							this.ws.send(
 								JSON.stringify({
 									op: 'unsubscribe',
 									args: [topic]
 								})
 							);
-							this.wsEvents = this.wsEvents.filter((e) => e !== event);
-							break;
-						default:
-							break;
+						}
+						this.wsEvents = this.wsEvents.filter((e) => e !== event);
+						break;
+					case 'order':
+					case 'wallet':
+					case 'deposit':
+						this.ws.send(
+							JSON.stringify({
+								op: 'unsubscribe',
+								args: [topic]
+							})
+						);
+						this.wsEvents = this.wsEvents.filter((e) => e !== event);
+						break;
+					default:
+						break;
 					}
 				}
 			});
