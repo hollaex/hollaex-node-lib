@@ -656,19 +656,17 @@ class HollaExKit {
 	}
 
 	/**
-	 * Cancel all the user's active orders, can filter by currency pair symbol
-	 * @param {object} opts - Optional parameters
-	 * @param {string} opts.symbol - The currency pair symbol to filter by e.g. 'hex-usdt', leave empty to cancel orders of all symbols
+	 * Cancel all the active orders of a user, filtered by currency pair symbol
+	 * @param {string} symbol - The currency pair symbol to filter by e.g. 'hex-usdt'
 	 * @return {array} A JSON array of objects containing the cancelled orders
 	 */
-	cancelAllOrders(opts = { symbol: null }) {
-		const verb = 'DELETE';
-		let path = `${this.baseUrl}/order/all`;
-
-		if (isString(opts.symbol)) {
-			path += `?symbol=${opts.symbol}`;
+	cancelAllOrders(symbol) {
+		if (!isString(symbol)) {
+			throw new Error('You must provide a symbol to cancel all orders for');
 		}
 
+		const verb = 'DELETE';
+		let path = `${this.baseUrl}/order/all?symbol=${symbol}`;
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -676,6 +674,7 @@ class HollaExKit {
 			path,
 			this.apiExpiresAfter
 		);
+
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
