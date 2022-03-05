@@ -421,6 +421,41 @@ class HollaExKit {
 	}
 
 	/**
+	 * Make a withdrawal
+	 * @param {string} currency - The currency to withdrawal
+	 * @param {number} amount - The amount of currency to withdrawal
+	 * @param {string} address - The recipient's wallet address
+	 * @param {object} opts - Optional parameters.
+	 * @param {string} opts.network - Crypto network of currency being withdrawn.
+	 * @return {object} A JSON object {message:"Success"}
+	 */
+	makeWithdrawal(currency, amount, address, opts = {
+		network: null,
+	}) {
+		const verb = 'POST';
+		const path = `${this.baseUrl}/user/withdrawal`;
+		const data = {
+			currency,
+			amount,
+			address
+		};
+
+		if (opts.network) {
+			data.network = opts.network;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	/**
 	 * Retrieve list of the user's completed trades
 	 * @param {object} opts - Optional parameters
 	 * @param {string} opts.symbol - The symbol-pair to filter by, pass undefined to receive data on all currencies
