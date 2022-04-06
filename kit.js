@@ -380,30 +380,24 @@ class HollaExKit {
 	}
 
 	/**
-	 * Make a withdrawal request
+	 * Make a withdrawal
 	 * @param {string} currency - The currency to withdrawal
 	 * @param {number} amount - The amount of currency to withdrawal
 	 * @param {string} address - The recipient's wallet address
 	 * @param {object} opts - Optional parameters.
 	 * @param {string} opts.network - Crypto network of currency being withdrawn.
-	 * @param {string} opts.otpCode - Otp code for user if otp is enabled.
 	 * @return {object} A JSON object {message:"Success"}
 	 */
-	requestWithdrawal(currency, amount, address, opts = {
+	makeWithdrawal(currency, amount, address, opts = {
 		network: null,
-		otpCode: null
 	}) {
 		const verb = 'POST';
-		const path = `${this.baseUrl}/user/request-withdrawal`;
+		const path = `${this.baseUrl}/user/withdrawal`;
 		const data = {
 			currency,
 			amount,
 			address
 		};
-
-		if (opts.network) {
-			data.otp_code = opts.otpCode;
-		}
 
 		if (opts.network) {
 			data.network = opts.network;
