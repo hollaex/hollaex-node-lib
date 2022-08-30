@@ -813,6 +813,7 @@ class HollaExKit {
 						}
 						break;
 					case 'order':
+					case 'usertrade':
 					case 'wallet':
 					case 'deposit':
 						this.ws.send(
