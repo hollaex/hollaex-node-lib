@@ -36,8 +36,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/bitholla/hollaex-node-lib"
+		"url": "https://github.com/hollaex/hollaex-node-lib"
 	},
-	"author": "bitHolla Inc",
 	"license": "MIT"
 }
