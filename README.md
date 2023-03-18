@@ -115,6 +115,9 @@ Here is the list of channels you can subscribe to:
 - `trades`
 - `order` (Only available with authentication. Receive order updates)
 - `wallet` (Only available with authentication. Receive balance updates)
+- `deposit` (Only available with authentication. Receive deposit notifications)
+- `withdrawal` (Only available with authentication. Receive withdrawal notifications)
+
 
 For public channels (`orderbook`, `trade`), you can subscribe to specific symbols as follows:
 `orderbook:xht-usdt`, `trade:xht-usdt`. Not passing a symbol will subscribe to all symbols.
@@ -309,6 +312,41 @@ These are exapmles of data responses from the server.
 		"time": 1608022610
 	}
 	```
+- **deposit**: Updates related to the user's private information are as follows:
+
+	```json
+	{
+		"topic": "deposit",
+		"action": "insert",
+		"user_id": 1,
+		"data": {
+			"amount": 1,
+			"currency": "xht",
+			"status": "COMPLETED",
+			 "transaction_id": "123",
+			...
+		},
+		"time": 1608021684
+	}
+	```
+- **withdrawal**: Updates related to the user's private information are as follows:
+
+	```json
+	{
+		"topic": "withdrawal",
+		"action": "insert",
+		"user_id": 1,
+		"data": {
+			"amount": 1,
+			"currency": "xht",
+			"status": "COMPLETED",
+			 "transaction_id": "123",
+			...
+		},
+		"time": 1608021684
+	}
+	```
+
 ## Example
 
 You can run the example by going to example folder and running:
