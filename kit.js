@@ -816,6 +816,7 @@ class HollaExKit {
 					case 'usertrade':
 					case 'wallet':
 					case 'deposit':
+					case 'withdrawal':
 						this.ws.send(
 							JSON.stringify({
 								op: 'subscribe',
@@ -868,6 +869,7 @@ class HollaExKit {
 					case 'order':
 					case 'wallet':
 					case 'deposit':
+					case 'withdrawal':
 						this.ws.send(
 							JSON.stringify({
 								op: 'unsubscribe',
