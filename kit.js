@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const moment = require('moment');
 const { createRequest, createSignature, generateHeaders, isDatetime, sanitizeDate } = require('./utils');
 const { setWsHeartbeat } = require('ws-heartbeat/client');
-const { each, union, isNumber, isString, isPlainObject, isBoolean } = require('lodash');
+const { each, union, isNumber, isString, isPlainObject, isBoolean, isObject, isArray } = require('lodash');
 class HollaExKit {
 	constructor(
 		opts = {
@@ -671,6 +671,1174 @@ class HollaExKit {
 
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
+
+
+	/**
+	 * Get admin exchange information
+	 * @return {object} A json object with the admin exchange information
+	 */
+	getExchangeInfo() {
+		const verb = 'GET';
+		const path = `${this.baseUrl}/admin/exchange`;
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	getExchangeDeposits(
+		opts = {
+			user_id: null,
+			currency: null,
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			status: null,
+			dismissed: null,
+			rejected: null,
+			processing: null,
+			waiting: null,
+			transaction_id: null,
+			address: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/deposits?`;
+
+		
+		if (isNumber(opts.user_id)) {
+			path += `&user_id=${opts.user_id}`;
+		}
+
+		if (isString(opts.currency)) {
+			path += `&currency=${opts.currency}`;
+		}
+
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+
+		if (isBoolean(opts.status)) {
+			path += `&status=${opts.status}`;
+		}
+
+		if (isBoolean(opts.dismissed)) {
+			path += `&dismissed=${opts.dismissed}`;
+		}
+
+		if (isBoolean(opts.rejected)) {
+			path += `&rejected=${opts.rejected}`;
+		}
+
+		if (isBoolean(opts.processing)) {
+			path += `&processing=${opts.processing}`;
+		}
+
+		if (isBoolean(opts.waiting)) {
+			path += `&waiting=${opts.waiting}`;
+		}
+
+		if (isString(opts.transaction_id)) {
+			path += `&transaction_id=${opts.transaction_id}`;
+		}
+
+		if (isString(opts.address)) {
+			path += `&address=${opts.address}`;
+		}
+
+		if (isString(opts.format) && opts.format === 'csv') {
+			path += `&format=${opts.format}`;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	getExchangeWithdrawals(
+		opts = {
+			currency: null,
+			user_id: null,
+			transaction_id: null,
+			address: null,
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			status: null,
+			dismissed: null,
+			rejected: null,
+			processing: null,
+			waiting: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/withdrawals?`;
+
+		if (isString(opts.currency)) {
+			path += `&currency=${opts.currency}`;
+		}
+
+		if (isNumber(opts.user_id)) {
+			path += `&user_id=${opts.user_id}`;
+		}
+
+		if (isString(opts.transaction_id)) {
+			path += `&transaction_id=${opts.transaction_id}`;
+		}
+
+		if (isString(opts.address)) {
+			path += `&address=${opts.address}`;
+		}
+
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+
+		if (isBoolean(opts.status)) {
+			path += `&status=${opts.status}`;
+		}
+
+		if (isBoolean(opts.dismissed)) {
+			path += `&dismissed=${opts.dismissed}`;
+		}
+
+		if (isBoolean(opts.rejected)) {
+			path += `&rejected=${opts.rejected}`;
+		}
+
+		if (isBoolean(opts.processing)) {
+			path += `&processing=${opts.processing}`;
+		}
+
+		if (isBoolean(opts.waiting)) {
+			path += `&waiting=${opts.waiting}`;
+		}
+
+		if (isString(opts.format) && opts.format === 'csv') {
+			path += `&format=${opts.format}`;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	getExchangeBalance() {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/balance`;
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	transferExchangeAsset(
+		sender_id,
+		receiver_id,
+		currency,
+		amount,
+		opts = {
+			description: null,
+			email: null
+		}
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/transfer?`;
+		const data = {
+			sender_id,
+			receiver_id,
+			currency,
+			amount
+		};
+
+		
+		if (isString(opts.description)) {
+			data.description = opts.transaction_id;
+		}
+
+		if (isBoolean(opts.email)) {
+			data.email = opts.status;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	createExchangeDeposit(
+		user_id,
+		currency,
+		amount,
+		opts = {
+			transaction_id: null,
+			status: null,
+			email: null,
+			fee: null
+		}
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/mint`;
+		const data = {
+			user_id,
+			currency,
+			amount
+		};
+
+		
+		if (isString(opts.transaction_id)) {
+			data.transaction_id = opts.transaction_id;
+		}
+
+		if (isBoolean(opts.status)) {
+			data.status = opts.status;
+		}
+
+		if (isBoolean(opts.email)) {
+			data.email = opts.email;
+		}
+
+		if (isNumber(opts.fee)) {
+			data.fee = opts.fee;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	updateExchangeDeposit(
+		transaction_id,
+		opts = {
+			updated_transaction_id: null,
+			updated_address: null,
+			status: null,
+			rejected: null,
+			dismissed: null,
+			processing: null,
+			waiting: null,
+			email: null,
+			description: null
+		}
+	) {
+		const verb = 'PUT';
+		let path = `${this.baseUrl}/admin/mint?`;
+		const data = {
+			transaction_id
+		};
+
+		if (isString(opts.updated_transaction_id)) {
+			data.updated_transaction_id = opts.updated_transaction_id;
+		}
+		
+		if (isString(opts.updated_address)) {
+			data.updated_address = opts.updated_address;
+		}
+
+		if (isBoolean(opts.status)) {
+			data.status = opts.status;
+		}
+
+		if (isBoolean(opts.rejected)) {
+			data.rejected = opts.rejected;
+		}
+
+		if (isBoolean(opts.dismissed)) {
+			data.dismissed = opts.dismissed;
+		}
+
+		if (isBoolean(opts.processing)) {
+			data.processing = opts.processing;
+		}
+
+		if (isBoolean(opts.waiting)) {
+			data.waiting = opts.waiting;
+		}
+
+		if (isBoolean(opts.email)) {
+			data.email = opts.email;
+		}
+
+		if (isString(opts.description)) {
+			data.description = opts.updated_transaction_id;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+
+	}
+
+	createExchangeWithdrawal(
+		user_id,
+		currency,
+		amount,
+		opts = {
+			transaction_id: null,
+			status: null,
+			email: null,
+			fee: null
+		}
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/burn?`;
+		const data = {
+			user_id,
+			currency,
+			amount
+		};
+	
+		
+		if (isString(opts.transaction_id)) {
+			data.transaction_id = opts.transaction_id;
+		}
+	
+		if (isBoolean(opts.status)) {
+			data.status = opts.status;
+		}
+	
+		if (isBoolean(opts.email)) {
+			data.email = opts.email;
+		}
+	
+		if (isNumber(opts.fee)) {
+			data.fee = opts.fee;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	updateExchangeWithdrawal(
+		transaction_id,
+		opts = {
+			updated_transaction_id: null,
+			updated_address: null,
+			status: null,
+			rejected: null,
+			dismissed: null,
+			processing: null,
+			waiting: null,
+			email: null,
+			description: null
+		}
+	) {
+		const verb = 'PUT';
+		let path = `${this.baseUrl}/admin/burn?`;
+		const data = {
+			transaction_id
+		};
+	
+		if (isString(opts.updated_transaction_id)) {
+			data.updated_transaction_id = opts.updated_transaction_id;
+		}
+		
+		if (isString(opts.updated_address)) {
+			data.updated_address = opts.updated_address;
+		}
+	
+		if (isBoolean(opts.status)) {
+			data.status = opts.status;
+		}
+	
+		if (isBoolean(opts.rejected)) {
+			data.rejected = opts.rejected;
+		}
+	
+		if (isBoolean(opts.dismissed)) {
+			data.dismissed = opts.dismissed;
+		}
+	
+		if (isBoolean(opts.processing)) {
+			data.processing = opts.processing;
+		}
+	
+		if (isBoolean(opts.waiting)) {
+			data.waiting = opts.waiting;
+		}
+	
+		if (isBoolean(opts.email)) {
+			data.email = opts.email;
+		}
+	
+		if (isString(opts.description)) {
+			data.description = opts.updated_transaction_id;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	checkExchangeDepositStatus(
+		currency,
+		transaction_id,
+		address,
+		network,
+		opts = {
+			is_testnet: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/check-transaction?`;
+	
+		if (isString(currency)) {
+			path += `&currency=${currency}`;
+		}
+	
+		if (isString(transaction_id)) {
+			path += `&transaction_id=${transaction_id}`;
+		}
+	
+		if (isString(address)) {
+			path += `&address=${address}`;
+		}
+	
+		if (isString(network)) {
+			path += `&network=${network}`;
+		}
+	
+		if (isBoolean(opts.is_testnet)) {
+			path += `&is_testnet=${opts.is_testnet}`;
+		}
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	settleExchangeFees(
+		opts = {
+			user_id: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/fees/settle`;
+	
+		if (isNumber(opts.user_id)) {
+			path += `?user_id=${opts.user_id}`;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	getExchangeTrades(
+		opts = {
+			user_id: null,
+			limit: null,
+			page: null,
+			symbol: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/trades?`;
+		
+		if (isNumber(opts.user_id)) {
+			path += `&user_id=${opts.user_id}`;
+		}
+	
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+	
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+	
+		if (isString(opts.symbol)) {
+			path += `&symbol=${opts.symbol}`;
+		}
+	
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+	
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+	
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+	
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+	
+		if (isString(opts.format) && opts.format === 'csv') {
+			path += `&format=${opts.format}`;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	getExchangeOrders(
+		opts = {
+			user_id: null,
+			side: null,
+			status: null,
+			open: null,
+			limit: null,
+			page: null,
+			symbol: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/orders?`;
+		
+		if (isNumber(opts.user_id)) {
+			path += `&user_id=${opts.user_id}`;
+		}
+	
+		if (isString(opts.side) && (opts.side === 'buy' || opts.side === 'sell')) {
+			path += `&side=${opts.side}`;
+		}
+		
+		if (isString(opts.status)) {
+			path += `&status=${opts.status}`;
+		}
+	
+		if (isBoolean(opts.open)) {
+			path += `&open=${opts.open}`;
+		}
+	
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+	
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+	
+		if (isString(opts.symbol)) {
+			path += `&symbol=${opts.symbol}`;
+		}
+	
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+	
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+	
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+	
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	cancelExchangeUserOrder(user_id, order_id) {
+		const verb = 'DELETE';
+		let path = `${this.baseUrl}/admin/order?`;
+	
+		if (isString(order_id)) {
+			path += `&order_id=${order_id}`;
+		}
+	
+		if (isNumber(user_id)) {
+			path += `&user_id=${user_id}`;
+		}
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	getExchangeUsers(
+		opts = {
+			id: null,
+			search: null,
+			type: null,
+			pending: null,
+			pending_type: null,
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/users?`;
+		
+		if (isNumber(opts.id)) {
+			path += `&id=${opts.id}`;
+		}
+	
+		if (isString(opts.search)) {
+			path += `&search=${opts.search}`;
+		}
+		
+		if (isString(opts.type)) {
+			path += `&type=${opts.type}`;
+		}
+	
+		if (isBoolean(opts.pending)) {
+			path += `&pending=${opts.pending}`;
+		}
+	
+		if (isString(opts.pending_type) && (opts.pending_type === 'id' ||opts.pending_type === 'bank')) {
+			path += `&pending_type=${opts.pending_type}`;
+		}
+	
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+	
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+	
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+	
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+	
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+	
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+	
+		if (isString(opts.format) && opts.format === 'csv') {
+			path += `&format=${opts.format}`;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	createExchangeUser(email, password) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/user`;
+		const data = {
+			email,
+			password
+		};
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	updateExchangeUser(
+		user_id,
+		opts = {
+			role: null,
+			meta: null,
+			overwrite: null,
+			discount: null,
+			note: null,
+			verification_level: null
+		},
+	
+	) {
+		if (isString(opts.role) 
+			&& ['admin', 'supervisor', 'support', 'kyc', 'communicator', 'user'].includes(opts.role)) {
+	
+			const verb = 'PUT';
+			let path = `${this.baseUrl}/admin/user/role`;
+
+			if (isNumber(user_id)) {
+				path += `?user_id=${user_id}`;
+			}
+			const data = {
+				role: opts.role
+			};
+	
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+		if(isObject(opts.meta)){
+			const verb = 'PUT';
+			let path = `${this.baseUrl}/admin/user/meta`;
+	
+			if (isNumber(user_id)) {
+				path += `?user_id=${user_id}`;
+			}
+	
+			const data = {
+				meta: opts.meta,
+				...(isBoolean(opts.overwrite) && { overwrite: opts.overwrite }),
+			};
+	
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+		if(isNumber(opts.discount) && opts.discount <= 100 && opts.discount >= 0){
+			const verb = 'PUT';
+			let path = `${this.baseUrl}/admin/user/discount`;
+	
+			if (isNumber(user_id)) {
+				path += `?user_id=${user_id}`;
+			}
+	
+			const data = {
+				discount: opts.discount
+			};
+	
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+		if(isString(opts.note)){
+			const verb = 'PUT';
+			let path = `${this.baseUrl}/admin/user/note`;
+	
+			if (isNumber(user_id)) {
+				path += `?user_id=${user_id}`;
+			}
+	
+			const data = {
+				note: opts.note
+			};
+	
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+		if(isNumber(opts.verification_level)){
+			const verb = 'POST';
+			let path = `${this.baseUrl}/admin/upgrade-user`;
+	
+			const data = {
+				user_id,
+				verification_level: opts.verification_level
+			};
+	
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+	}
+	
+	createExchangeUserWallet(
+		user_id,
+		opts= {
+			crypto: null,
+			network: null
+		}
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/user/address`;
+		const data = {
+			user_id
+		};
+	
+		if (isString(opts.crypto)) {
+			data.crypto = opts.crypto;
+		}
+	
+		if (isString(opts.network)) {
+			data.network = opts.network;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	getExchangeUserBalance(user_id) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/user/balance?user_id=${user_id}`;
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	createExchangeUserBank(user_id, bank_account) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/user/bank`;
+		
+		if (isNumber(user_id)) {
+			path += `?id=${user_id}`;
+		}
+	
+		const data = {
+			bank_account
+		};
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		
+	}
+	
+	getExchangeUserLogins(
+		opts = {
+			user_id: null,
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/logins?`;
+		
+		if (isNumber(opts.user_id)) {
+			path += `&user_id=${opts.user_id}`;
+		}
+	
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+	
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+	
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+	
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+	
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+	
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+	
+		if (isString(opts.format) && opts.format === 'csv') {
+			path += `&format=${opts.format}`;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	deactivateExchangeUser() {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/user/activate`;
+		const data = {
+			user_id,
+			activated: false
+		};
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	deactivateExchangeUserOtp(user_id) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/deactivate-otp`;
+		const data = {
+			user_id
+		};
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	getExchangeUserReferrals(
+		user_id = null,
+		opts = {
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/user/affiliation?`;
+	
+		
+		if (isNumber(user_id)) {
+			path += `&user_id=${user_id}`;
+		}
+	
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+	
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+	
+		if (isString(opts.order_by)) {
+			path += `&order_by=${opts.order_by}`;
+		}
+	
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+	
+		if (isDatetime(opts.start_date)) {
+			path += `&start_date=${opts.start_date}`;
+		}
+	
+		if (isDatetime(opts.end_date)) {
+			path += `&end_date=${opts.end_date}`;
+		}
+	
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+	getExchangeUserReferrer(user_id) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/user/referer?user_id=${user_id}`;
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
 
 	/**
 	 * Connect to hollaEx websocket and listen to an event
