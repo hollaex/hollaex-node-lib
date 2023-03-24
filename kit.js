@@ -1610,20 +1610,17 @@ class HollaExKit {
 	
 	createExchangeUserWallet(
 		user_id,
+		crypto,
 		opts= {
-			crypto: null,
 			network: null
 		}
 	) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user/address`;
 		const data = {
-			user_id
+			user_id,
+			crypto
 		};
-	
-		if (isString(opts.crypto)) {
-			data.crypto = opts.crypto;
-		}
 	
 		if (isString(opts.network)) {
 			data.network = opts.network;
