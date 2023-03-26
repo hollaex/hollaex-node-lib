@@ -945,7 +945,7 @@ class HollaExKit {
 	}
 
 	/**
-	 * Create exchange deposit by admin
+	 * Transfer exchange asset by admin
 	 * @param {number} senderId - The identifier of the sender
 	 * @param {number} receiverId - The identifier of the receiver
 	 * @param {string} currency - The currency to specify
@@ -1513,7 +1513,7 @@ class HollaExKit {
 	}
 	
 	/**
-	 * Cancel user's order by
+	 * Cancel user's order by order id
 	 * @param {number} userId - The identifier of the user
 	 * @param {string} orderId - The identifier of the order
 	 * @return {object} A JSON object with message
@@ -1540,7 +1540,7 @@ class HollaExKit {
 	}
 
 	/**
-	 * Retrieve list of the user's withdrawals by admin
+	 * Retrieve list of the user info by admin
 	 * @param {object} opts - Optional parameters
 	 * @param {number} opts.userId - The identifier of the user to filter by
 	 * @param {string} opts.search - The search text to filter by, pass undefined to receive data on all fields
@@ -1659,7 +1659,6 @@ class HollaExKit {
 	
 	/**
 	 * Update exchange user
-	 * @param {object} opts - Optional parameters
 	 * @param {number} userId - The identifier of the user to filter by
 	 * @param {object} opts.meta - The field to update user meta info
 	 * @param {boolean} opts.overwrite - the field to set overwrite option along with meta object
@@ -1975,7 +1974,7 @@ class HollaExKit {
 	
 	/**
 	 * Deactivate user otp by admin
-	 * @param {number} userId - The identifier of the user to deactivate their opt
+	 * @param {number} userId - The identifier of the user to deactivate their otp
 	 * @return {object} A JSON object with message
 	 */
 	deactivateExchangeUserOtp(userId) {
@@ -2064,7 +2063,7 @@ class HollaExKit {
 	/**
 	 * Retrieve user's referer info by admin
 	 * @param {number} userId - The identifier of the user to filter by
-	 * @return {object} A JSON object with user info
+	 * @return {object} A JSON object with referrer info
 	 */
 	getExchangeUserReferrer(userId) {
 		const verb = 'GET';
