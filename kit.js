@@ -690,22 +690,43 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
+	/**
+	 * Retrieve list of the user's deposits by admin
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.userId - The identifier of the user to filter by
+	 * @param {string} opts.currency - The currency to filter by, pass undefined to receive data on all currencies
+	 * @param {number} opts.limit - Amount of deposits per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of deposit data. Default: 1
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @param {boolean} opts.status - Confirmed status of the deposits to get. Leave blank to get all confirmed and unconfirmed deposits
+	 * @param {boolean} opts.dismissed - Dismissed status of the deposits to get. Leave blank to get all dismissed and undismissed deposits
+	 * @param {boolean} opts.rejected - Rejected status of the deposits to get. Leave blank to get all rejected and unrejected deposits
+	 * @param {boolean} opts.processing - Processing status of the deposits to get. Leave blank to get all processing and unprocessing deposits
+	 * @param {boolean} opts.waiting - Waiting status of the deposits to get. Leave blank to get all waiting and unwaiting deposits
+	 * @param {string} opts.transactionId - Deposits with specific transaction ID.
+	 * @param {string} opts.address - Deposits with specific address.
+	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
+	 * @return {object} A JSON object with the keys count(total number of user's deposits) and data(array of deposits as objects with keys id(number), type(string), amount(number), transaction_id(string), currency(string), created_at(string), status(boolean), fee(number), dismissed(boolean), rejected(boolean), description(string))
+	 */
 	getExchangeDeposits(
 		opts = {
-			user_id: null,
+			userId: null,
 			currency: null,
 			limit: null,
 			page: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null,
+			startDate: null,
+			endDate: null,
 			status: null,
 			dismissed: null,
 			rejected: null,
 			processing: null,
 			waiting: null,
-			transaction_id: null,
+			transactionId: null,
 			address: null,
 			format: null
 		}
@@ -714,8 +735,8 @@ class HollaExKit {
 		let path = `${this.baseUrl}/admin/deposits?`;
 
 		
-		if (isNumber(opts.user_id)) {
-			path += `&user_id=${opts.user_id}`;
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
 		}
 
 		if (isString(opts.currency)) {
@@ -730,20 +751,20 @@ class HollaExKit {
 			path += `&page=${opts.page}`;
 		}
 
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${opts.endDate}`;
 		}
 
 		if (isBoolean(opts.status)) {
@@ -766,8 +787,8 @@ class HollaExKit {
 			path += `&waiting=${opts.waiting}`;
 		}
 
-		if (isString(opts.transaction_id)) {
-			path += `&transaction_id=${opts.transaction_id}`;
+		if (isString(opts.transactionId)) {
+			path += `&transaction_id=${opts.transactionId}`;
 		}
 
 		if (isString(opts.address)) {
@@ -787,19 +808,40 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-
+	
+	/**
+	 * Retrieve list of the user's withdrawals by admin
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.userId - The identifier of the user to filter by
+	 * @param {string} opts.currency - The currency to filter by, pass undefined to receive data on all currencies
+	 * @param {boolean} opts.status - Confirmed status of the withdrawals to get. Leave blank to get all confirmed and unconfirmed withdrawals
+	 * @param {boolean} opts.dismissed - Dismissed status of the withdrawals to get. Leave blank to get all dismissed and undismissed withdrawals
+	 * @param {boolean} opts.rejected - Rejected status of the withdrawals to get. Leave blank to get all rejected and unrejected withdrawals
+	 * @param {boolean} opts.processing - Processing status of the withdrawals to get. Leave blank to get all processing and unprocessing withdrawals
+	 * @param {boolean} opts.waiting - Waiting status of the withdrawals to get. Leave blank to get all waiting and unwaiting withdrawals
+	 * @param {number} opts.limit - Amount of withdrawals per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of withdrawal data. Default: 1
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @param {string} opts.transactionId - Withdrawals with specific transaction ID.
+	 * @param {string} opts.address - Withdrawals with specific address.
+	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
+	 * @return {object} A JSON object with the keys count(total number of user's withdrawals) and data(array of withdrawals as objects with keys id(number), type(string), amount(number), transaction_id(string), currency(string), created_at(string), status(boolean), fee(number), dismissed(boolean), rejected(boolean), description(string))
+	 */
 	getExchangeWithdrawals(
 		opts = {
 			currency: null,
-			user_id: null,
-			transaction_id: null,
+			userId: null,
+			transactionId: null,
 			address: null,
 			limit: null,
 			page: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null,
+			startDate: null,
+			endDate: null,
 			status: null,
 			dismissed: null,
 			rejected: null,
@@ -815,12 +857,12 @@ class HollaExKit {
 			path += `&currency=${opts.currency}`;
 		}
 
-		if (isNumber(opts.user_id)) {
-			path += `&user_id=${opts.user_id}`;
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
 		}
 
-		if (isString(opts.transaction_id)) {
-			path += `&transaction_id=${opts.transaction_id}`;
+		if (isString(opts.transactionId)) {
+			path += `&transaction_id=${opts.transactionId}`;
 		}
 
 		if (isString(opts.address)) {
@@ -835,20 +877,20 @@ class HollaExKit {
 			path += `&page=${opts.page}`;
 		}
 
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${opts.endDate}`;
 		}
 
 		if (isBoolean(opts.status)) {
@@ -885,6 +927,10 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
+	/**
+	 * Retrieve admin's wallet balance
+	 * @return {object} A JSON object with the keys updated_at(string), usdt_balance(number), usdt_pending(number), usdt_available(number), hex_balance, hex_pending, hex_available, eth_balance, eth_pending, eth_available, bch_balance, bch_pending, bch_available
+	 */
 	getExchangeBalance() {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/balance`;
@@ -898,9 +944,19 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
+	/**
+	 * Create exchange deposit by admin
+	 * @param {number} senderId - The identifier of the sender
+	 * @param {number} receiverId - The identifier of the receiver
+	 * @param {string} currency - The currency to specify
+	 * @param {number} amount - The amount to specify
+	 * @param {string} opts.description - The description field
+	 * @param {boolean} opts.email - The email field
+	 * @return {object} A JSON object with transfer info
+	 */
 	transferExchangeAsset(
-		sender_id,
-		receiver_id,
+		senderId,
+		receiverId,
 		currency,
 		amount,
 		opts = {
@@ -911,19 +967,19 @@ class HollaExKit {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/transfer?`;
 		const data = {
-			sender_id,
-			receiver_id,
+			sender_id: senderId,
+			receiver_id: receiverId,
 			currency,
 			amount
 		};
 
 		
 		if (isString(opts.description)) {
-			data.description = opts.transaction_id;
+			data.description = opts.description;
 		}
 
 		if (isBoolean(opts.email)) {
-			data.email = opts.status;
+			data.email = opts.email;
 		}
 
 		const headers = generateHeaders(
@@ -937,12 +993,23 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 
+    /**
+	 * Create exchange deposit by admin
+	 * @param {number} userId - The identifier of the user
+	 * @param {string} currency - The currency to specify
+	 * @param {number} amount - The amount to specify
+	 * @param {string} opts.transactionId - deposit with specific transaction ID.
+	 * @param {boolean} opts.status - The status field to confirm the deposit
+	 * @param {boolean} opts.email - The email field
+	 * @param {number} opts.fee - The fee to specify
+	 * @return {object} A JSON object with deposit info
+	 */
 	createExchangeDeposit(
-		user_id,
+		userId,
 		currency,
 		amount,
 		opts = {
-			transaction_id: null,
+			transactionId: null,
 			status: null,
 			email: null,
 			fee: null
@@ -951,14 +1018,14 @@ class HollaExKit {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/mint`;
 		const data = {
-			user_id,
+			user_id: userId,
 			currency,
 			amount
 		};
 
 		
-		if (isString(opts.transaction_id)) {
-			data.transaction_id = opts.transaction_id;
+		if (isString(opts.transactionId)) {
+			data.transaction_id = opts.transactionId;
 		}
 
 		if (isBoolean(opts.status)) {
@@ -984,11 +1051,24 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 
+	/**
+	 * Update exchange deposit by admin
+	 * @param {string} transactionId - Deposits with specific transaction ID.
+	 * @param {boolean} opts.updatedTransactionId - Deposits with updated transaction id
+	 * @param {boolean} opts.updatedAddress - Deposits with updated address
+	 * @param {boolean} opts.status - Confirmed status of the deposits to set. 
+	 * @param {boolean} opts.dismissed - Dismissed status of the deposits to set.
+	 * @param {boolean} opts.rejected - Rejected status of the deposits to set. 
+	 * @param {boolean} opts.processing - Processing status of the deposits to set. 
+	 * @param {boolean} opts.waiting - Waiting status of the deposits to set.
+	 * @param {boolean} opts.email - Email
+	 * @return {object} A JSON object with deposit info
+	 */
 	updateExchangeDeposit(
-		transaction_id,
+		transactionId,
 		opts = {
-			updated_transaction_id: null,
-			updated_address: null,
+			updatedTransactionId: null,
+			updatedAddress: null,
 			status: null,
 			rejected: null,
 			dismissed: null,
@@ -1001,15 +1081,15 @@ class HollaExKit {
 		const verb = 'PUT';
 		let path = `${this.baseUrl}/admin/mint?`;
 		const data = {
-			transaction_id
+			transaction_id: transactionId
 		};
 
-		if (isString(opts.updated_transaction_id)) {
-			data.updated_transaction_id = opts.updated_transaction_id;
+		if (isString(opts.updatedTransactionId)) {
+			data.updated_transaction_id = opts.updatedTransactionId;
 		}
 		
-		if (isString(opts.updated_address)) {
-			data.updated_address = opts.updated_address;
+		if (isString(opts.updatedAddress)) {
+			data.updated_address = opts.updatedAddress;
 		}
 
 		if (isBoolean(opts.status)) {
@@ -1037,7 +1117,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.description)) {
-			data.description = opts.updated_transaction_id;
+			data.description = opts.description;
 		}
 
 		const headers = generateHeaders(
@@ -1052,12 +1132,23 @@ class HollaExKit {
 
 	}
 
+	/**
+	 * Create exchange withdrawal by admin
+	 * @param {number} userId - The identifier of the user
+	 * @param {string} currency - The currency to specify
+	 * @param {number} amount - The amount to specify
+	 * @param {string} opts.transactionId - Withdrawal with specific transaction ID.
+	 * @param {boolean} opts.status - The status field to confirm the withdrawal
+	 * @param {boolean} opts.email - The email field
+	 * @param {number} opts.fee - The fee to specify
+	 * @return {object} A JSON object with withdrawal info
+	 */
 	createExchangeWithdrawal(
-		user_id,
+		userId,
 		currency,
 		amount,
 		opts = {
-			transaction_id: null,
+			transactionId: null,
 			status: null,
 			email: null,
 			fee: null
@@ -1066,14 +1157,14 @@ class HollaExKit {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/burn?`;
 		const data = {
-			user_id,
+			user_id: userId,
 			currency,
 			amount
 		};
 	
 		
-		if (isString(opts.transaction_id)) {
-			data.transaction_id = opts.transaction_id;
+		if (isString(opts.transactionId)) {
+			data.transaction_id = opts.transactionId;
 		}
 	
 		if (isBoolean(opts.status)) {
@@ -1099,11 +1190,24 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 	
+	/**
+	 * Update Exchange Withdrawal
+	 * @param {string} transactionId - Withdrawals with specific transaction ID.
+	 * @param {boolean} opts.updatedTransactionId - Withdrawals with updated transaction id
+	 * @param {boolean} opts.updatedAddress - Withdrawals with updated address
+	 * @param {boolean} opts.status - Confirmed status of the withdrawals to set. 
+	 * @param {boolean} opts.dismissed - Dismissed status of the withdrawals to set.
+	 * @param {boolean} opts.rejected - Rejected status of the withdrawals to set. 
+	 * @param {boolean} opts.processing - Processing status of the withdrawals to set.
+	 * @param {boolean} opts.waiting - Waiting status of the withdrawals to set.
+	 * @param {boolean} opts.email - Email
+	 * @return {object} A JSON object with withdrawal info
+	 */
 	updateExchangeWithdrawal(
-		transaction_id,
+		transactionId,
 		opts = {
-			updated_transaction_id: null,
-			updated_address: null,
+			updatedTransactionId: null,
+			updatedAddress: null,
 			status: null,
 			rejected: null,
 			dismissed: null,
@@ -1116,15 +1220,15 @@ class HollaExKit {
 		const verb = 'PUT';
 		let path = `${this.baseUrl}/admin/burn?`;
 		const data = {
-			transaction_id
+			transaction_id: transactionId
 		};
 	
-		if (isString(opts.updated_transaction_id)) {
-			data.updated_transaction_id = opts.updated_transaction_id;
+		if (isString(opts.updatedTransactionId)) {
+			data.updated_transaction_id = opts.updatedTransactionId;
 		}
 		
-		if (isString(opts.updated_address)) {
-			data.updated_address = opts.updated_address;
+		if (isString(opts.updatedAddress)) {
+			data.updated_address = opts.updatedAddress;
 		}
 	
 		if (isBoolean(opts.status)) {
@@ -1152,7 +1256,7 @@ class HollaExKit {
 		}
 	
 		if (isString(opts.description)) {
-			data.description = opts.updated_transaction_id;
+			data.description = opts.description;
 		}
 	
 		const headers = generateHeaders(
@@ -1165,14 +1269,24 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+		
+	/**
+	 * Check exchange deposit status
+	 * @param {number} userId - The identifier of the user
+	 * @param {string} currency - The currency to filter by, pass undefined to receive data on all currencies
+	 * @param {string} transactionId - Deposits with specific transaction ID.
+	 * @param {string} address - Deposits with specific address.
+	 * @param {string} network - The network info
+	 * @param {string} opts.isTestnet - The info on whether it's a testnet or not
+	 * @return {object} A JSON object with deposit status info
+	 */
 	checkExchangeDepositStatus(
 		currency,
-		transaction_id,
+		transactionId,
 		address,
 		network,
 		opts = {
-			is_testnet: null
+			isTestnet: null
 		}
 	) {
 		const verb = 'GET';
@@ -1182,8 +1296,8 @@ class HollaExKit {
 			path += `&currency=${currency}`;
 		}
 	
-		if (isString(transaction_id)) {
-			path += `&transaction_id=${transaction_id}`;
+		if (isString(transactionId)) {
+			path += `&transaction_id=${transactionId}`;
 		}
 	
 		if (isString(address)) {
@@ -1194,8 +1308,8 @@ class HollaExKit {
 			path += `&network=${network}`;
 		}
 	
-		if (isBoolean(opts.is_testnet)) {
-			path += `&is_testnet=${opts.is_testnet}`;
+		if (isBoolean(opts.isTestnet)) {
+			path += `&is_testnet=${opts.isTestnet}`;
 		}
 		const headers = generateHeaders(
 			this.headers,
@@ -1207,16 +1321,21 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
+	/**
+	 * Set exchange fees by admin
+	 * @param {number} opts.userId - The identifier of the user
+	 * @return {object} A JSON object with message
+	 */
 	settleExchangeFees(
 		opts = {
-			user_id: null
+			userId: null
 		}
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/fees/settle`;
 	
-		if (isNumber(opts.user_id)) {
-			path += `?user_id=${opts.user_id}`;
+		if (isNumber(opts.userId)) {
+			path += `?user_id=${opts.userId}`;
 		}
 	
 		const headers = generateHeaders(
@@ -1229,24 +1348,38 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
+	/**
+	 * Retrieve user's trades by admin
+	 * @param {number} opts.userId - The identifier of the user
+	 * @param {string} opts.side - The order side (buy or side)
+	 * @param {number} opts.limit - Amount of trades per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of trades data. Default: 1
+	 * @param {string} opts.symbol - The symbol-pair to filter by, pass undefined to receive data on all currencies
+	 * @param {string} opts.orderBy - The field to trade data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
+	 * @return {object} A JSON object with trade info
+	 */
 	getExchangeTrades(
 		opts = {
-			user_id: null,
+			userId: null,
 			limit: null,
 			page: null,
 			symbol: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null,
+			startDate: null,
+			startDate: null,
 			format: null
 		}
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/trades?`;
 		
-		if (isNumber(opts.user_id)) {
-			path += `&user_id=${opts.user_id}`;
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
 		}
 	
 		if (isNumber(opts.limit)) {
@@ -1261,20 +1394,20 @@ class HollaExKit {
 			path += `&symbol=${opts.symbol}`;
 		}
 	
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 	
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 	
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&end_date=${opts.startDate}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
@@ -1290,27 +1423,43 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
+	/**
+	 * Retrieve user's orders by admin
+	 * @param {number} opts.userId - The identifier of the user
+	 * @param {string} opts.side - The order side (buy or side)
+	 * @param {string} opts.status - The order's status e.g open, filled, canceled etc
+	 * @param {boolean} opts.open - The info on whether the order is active or not 
+	 * @param {string} opts.side - The order side (buy or side)
+	 * @param {number} opts.limit - Amount of orders per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of order data. Default: 1
+	 * @param {string} opts.symbol - The symbol-pair to filter by, pass undefined to receive data on all currencies
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @return {object} A JSON object with order info
+	 */
 	getExchangeOrders(
 		opts = {
-			user_id: null,
+			userId: null,
 			side: null,
 			status: null,
 			open: null,
 			limit: null,
 			page: null,
 			symbol: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null
+			startDate: null,
+			endDate: null
 		}
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/orders?`;
 		
-		if (isNumber(opts.user_id)) {
-			path += `&user_id=${opts.user_id}`;
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
 		}
 	
 		if (isString(opts.side) && (opts.side === 'buy' || opts.side === 'sell')) {
@@ -1337,20 +1486,20 @@ class HollaExKit {
 			path += `&symbol=${opts.symbol}`;
 		}
 	
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 	
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 	
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${opts.endDate}`;
 		}
 
 		const headers = generateHeaders(
@@ -1363,16 +1512,22 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
-	cancelExchangeUserOrder(user_id, order_id) {
+	/**
+	 * Cancel user's order by
+	 * @param {number} userId - The identifier of the user
+	 * @param {string} orderId - The identifier of the order
+	 * @return {object} A JSON object with message
+	 */
+	cancelExchangeUserOrder(userId, orderId) {
 		const verb = 'DELETE';
 		let path = `${this.baseUrl}/admin/order?`;
 	
-		if (isString(order_id)) {
-			path += `&order_id=${order_id}`;
+		if (isString(orderId)) {
+			path += `&order_id=${orderId}`;
 		}
 	
-		if (isNumber(user_id)) {
-			path += `&user_id=${user_id}`;
+		if (isNumber(userId)) {
+			path += `&user_id=${userId}`;
 		}
 		const headers = generateHeaders(
 			this.headers,
@@ -1383,28 +1538,44 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
+	/**
+	 * Retrieve list of the user's withdrawals by admin
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.userId - The identifier of the user to filter by
+	 * @param {string} opts.search - The search text to filter by, pass undefined to receive data on all fields
+	 * @param {boolean} opts.pending - The pending field to filter by, pass undefined to receive all data
+	 * @param {string} opts.pendingType - Th pending type info to filter by, pass undefined to receive data
+	 * @param {number} opts.limit - Amount of users per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of user data. Default: 1
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
+	 * @return {object} A JSON object with user data
+	 */
 	getExchangeUsers(
 		opts = {
-			id: null,
+			userId: null,
 			search: null,
 			type: null,
 			pending: null,
-			pending_type: null,
+			pendingType: null,
 			limit: null,
 			page: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null,
+			startDate: null,
+			endDate: null,
 			format: null
 		}
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/users?`;
 		
-		if (isNumber(opts.id)) {
-			path += `&id=${opts.id}`;
+		if (isNumber(opts.userId)) {
+			path += `&id=${opts.userId}`;
 		}
 	
 		if (isString(opts.search)) {
@@ -1419,8 +1590,8 @@ class HollaExKit {
 			path += `&pending=${opts.pending}`;
 		}
 	
-		if (isString(opts.pending_type) && (opts.pending_type === 'id' ||opts.pending_type === 'bank')) {
-			path += `&pending_type=${opts.pending_type}`;
+		if (isString(opts.pendingType) && (opts.pendingType === 'id' ||opts.pendingType === 'bank')) {
+			path += `&pending_type=${opts.pendingType}`;
 		}
 	
 		if (isNumber(opts.limit)) {
@@ -1431,20 +1602,20 @@ class HollaExKit {
 			path += `&page=${opts.page}`;
 		}
 	
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 	
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 	
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${opts.endDate}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
@@ -1461,6 +1632,12 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
+	/**
+	 * Create exchange user
+	 * @param {string} email - The mail address for the user
+	 * @param {string} password - The password for the user
+	 * @return {object} A JSON object with message
+	 */
 	createExchangeUser(email, password) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user`;
@@ -1480,8 +1657,19 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 	
+	/**
+	 * Update exchange user
+	 * @param {object} opts - Optional parameters
+	 * @param {number} userId - The identifier of the user to filter by
+	 * @param {object} opts.meta - The field to update user meta info
+	 * @param {boolean} opts.overwrite - the field to set overwrite option along with meta object
+	 * @param {string} opts.role - The field to update user role ('admin', 'supervisor', 'support', 'kyc', 'communicator', 'user')
+	 * @param {string} opts.note - The field to update user note 
+	 * @param {number} opts.verification_level - The field to set user's verification level
+	 * @return {object} A JSON object with user data
+	 */
 	updateExchangeUser(
-		user_id,
+		userId,
 		opts = {
 			role: null,
 			meta: null,
@@ -1498,8 +1686,8 @@ class HollaExKit {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/role`;
 
-			if (isNumber(user_id)) {
-				path += `?user_id=${user_id}`;
+			if (isNumber(userId)) {
+				path += `?user_id=${userId}`;
 			}
 			const data = {
 				role: opts.role
@@ -1520,8 +1708,8 @@ class HollaExKit {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/meta`;
 	
-			if (isNumber(user_id)) {
-				path += `?user_id=${user_id}`;
+			if (isNumber(userId)) {
+				path += `?user_id=${userId}`;
 			}
 	
 			const data = {
@@ -1544,8 +1732,8 @@ class HollaExKit {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/discount`;
 	
-			if (isNumber(user_id)) {
-				path += `?user_id=${user_id}`;
+			if (isNumber(userId)) {
+				path += `?user_id=${userId}`;
 			}
 	
 			const data = {
@@ -1567,8 +1755,8 @@ class HollaExKit {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/note`;
 	
-			if (isNumber(user_id)) {
-				path += `?user_id=${user_id}`;
+			if (isNumber(userId)) {
+				path += `?user_id=${userId}`;
 			}
 	
 			const data = {
@@ -1591,7 +1779,7 @@ class HollaExKit {
 			let path = `${this.baseUrl}/admin/upgrade-user`;
 	
 			const data = {
-				user_id,
+				user_id: userId,
 				verification_level: opts.verification_level
 			};
 	
@@ -1608,8 +1796,15 @@ class HollaExKit {
 	
 	}
 	
+	/**
+	 * Create wallet for exchange user
+	 * @param {number} userId - The identifier of the user
+	 * @param {string} crypto - The coin for the wallet e.g btc, eth 
+	 * @param {string} opts.network - The network info 
+	 * @return {object} A JSON object with message
+	 */
 	createExchangeUserWallet(
-		user_id,
+		userId,
 		crypto,
 		opts= {
 			network: null
@@ -1618,7 +1813,7 @@ class HollaExKit {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user/address`;
 		const data = {
-			user_id,
+			user_id: userId,
 			crypto
 		};
 	
@@ -1637,9 +1832,14 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 	
-	getExchangeUserBalance(user_id) {
+	/**
+	 * Retrieve user's login info by admin
+	 * @param {number} userId - The identifier of the user
+	 * @return {object} A JSON object with user balance
+	 */
+	getExchangeUserBalance(userId) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/user/balance?user_id=${user_id}`;
+		let path = `${this.baseUrl}/admin/user/balance?user_id=${userId}`;
 	
 		const headers = generateHeaders(
 			this.headers,
@@ -1651,16 +1851,22 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
-	createExchangeUserBank(user_id, bank_account) {
+	/**
+	 * Create bank account for user by admin
+	 * @param {number} userId - The identifier of the user
+	 * @param {object} bankAccount - Object with bank account info
+	 * @return {object} A JSON object with bank account info
+	 */
+	createExchangeUserBank(userId, bankAccount) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user/bank`;
 		
-		if (isNumber(user_id)) {
-			path += `?id=${user_id}`;
+		if (isNumber(userId)) {
+			path += `?id=${userId}`;
 		}
 	
 		const data = {
-			bank_account
+			bank_account: bankAccount
 		};
 	
 		const headers = generateHeaders(
@@ -1675,23 +1881,34 @@ class HollaExKit {
 		
 	}
 	
+	/**
+	 * Retrieve user's login info by admin
+	 * @param {number} opts.userId - The identifier of the user
+	 * @param {number} opts.limit - Amount of logins per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of referral data. Default: 1
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @return {object} A JSON object with login info
+	 */
 	getExchangeUserLogins(
 		opts = {
-			user_id: null,
+			userId: null,
 			limit: null,
 			page: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null,
+			startDate: null,
+			endDate: null,
 			format: null
 		}
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/logins?`;
 		
-		if (isNumber(opts.user_id)) {
-			path += `&user_id=${opts.user_id}`;
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
 		}
 	
 		if (isNumber(opts.limit)) {
@@ -1702,20 +1919,20 @@ class HollaExKit {
 			path += `&page=${opts.page}`;
 		}
 	
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 	
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 	
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${opts.endDate}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
@@ -1732,11 +1949,16 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
-	deactivateExchangeUser() {
+    /**
+	 * Deactivate exchange user account by admin
+	 * @param {number} userId - The identifier of the user to deactivate their exchange account
+	 * @return {object} A JSON object with message
+	 */
+	deactivateExchangeUser(userId) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user/activate`;
 		const data = {
-			user_id,
+			user_id: userId,
 			activated: false
 		};
 	
@@ -1751,11 +1973,16 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 	
-	deactivateExchangeUserOtp(user_id) {
+	/**
+	 * Deactivate user otp by admin
+	 * @param {number} userId - The identifier of the user to deactivate their opt
+	 * @return {object} A JSON object with message
+	 */
+	deactivateExchangeUserOtp(userId) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/deactivate-otp`;
 		const data = {
-			user_id
+			user_id: userId
 		};
 	
 		const headers = generateHeaders(
@@ -1769,23 +1996,34 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 	
+	/**
+	 * Retrieve user's referrals info by admin
+	 * @param {number} userId - The identifier of the user to filter by
+	 * @param {number} opts.limit - Amount of referrals per page. Maximum: 50. Default: 50
+	 * @param {number} opts.page - Page of referral data. Default: 1
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
+	 * @return {object} A JSON object with referral info
+	 */
 	getExchangeUserReferrals(
-		user_id = null,
+		userId = null,
 		opts = {
 			limit: null,
 			page: null,
-			order_by: null,
+			orderBy: null,
 			order: null,
-			start_date: null,
-			end_date: null
+			startDate: null,
+			endDate: null
 		}
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/user/affiliation?`;
 	
 		
-		if (isNumber(user_id)) {
-			path += `&user_id=${user_id}`;
+		if (isNumber(userId)) {
+			path += `&user_id=${userId}`;
 		}
 	
 		if (isNumber(opts.limit)) {
@@ -1796,20 +2034,20 @@ class HollaExKit {
 			path += `&page=${opts.page}`;
 		}
 	
-		if (isString(opts.order_by)) {
-			path += `&order_by=${opts.order_by}`;
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			path += `&order=${opts.order}`;
 		}
 	
-		if (isDatetime(opts.start_date)) {
-			path += `&start_date=${opts.start_date}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${opts.startDate}`;
 		}
 	
-		if (isDatetime(opts.end_date)) {
-			path += `&end_date=${opts.end_date}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${opts.endDate}`;
 		}
 	
 	
@@ -1822,10 +2060,15 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
-	getExchangeUserReferrer(user_id) {
+
+	/**
+	 * Retrieve user's referer info by admin
+	 * @param {number} userId - The identifier of the user to filter by
+	 * @return {object} A JSON object with user info
+	 */
+	getExchangeUserReferrer(userId) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/user/referer?user_id=${user_id}`;
+		let path = `${this.baseUrl}/admin/user/referer?user_id=${userId}`;
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,

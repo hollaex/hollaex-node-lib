@@ -77,6 +77,11 @@ client
 | `cancelOrder` | <ul><li>**orderId**: HollaEx Network order ID</li></ul> | Cancel a specific order with its ID |
 | `cancelAllOrders` | <ul><li>**symbol**: HollaEx trading symbol e.g. `xht-usdt`</li></ul> | Cancel all the active orders of a user, filtered by currency pair symbol |
 
+| `getExchangeInfo` |  | Cancel | Get admin exchange information
+| `getExchangeDeposits` | <ul><li>opts.userId: The identifier of the user to filter by</li><li>opts.currency: The currency to filter by, pass undefined to receive data on all currencies</li><li>opts.limit: Amount of deposits per page. Maximum: 50. Default: 50</li><li>opts.page: Page of deposit data. Default: 1</li><li>opts.orderBy: The field to order data by e.g. amount, id.</li><li>opts.order: Ascending (asc) or descending (desc).</li><li>opts.startDate: Start date of query in ISO8601 format.</li><li>opts.endDate: End date of query in ISO8601 format.</li><li>opts.status: Confirmed status of the deposits to get. Leave blank to get all confirmed and unconfirmed deposits</li><li>opts.dismissed: Dismissed status of the deposits to get. Leave blank to get all dismissed and undismissed </li>deposits<li>opts.rejected: Rejected status of the deposits to get. Leave blank to get all rejected and unrejected deposits</li><li>opts.processing: Processing status of the deposits to get. Leave blank to get all processing and unprocessing </li><li>deposits</li><li>opts.waiting: Waiting status of the deposits to get. Leave blank to get all waiting and unwaiting deposits</li><li>opts.transactionId: Deposits with specific transaction ID.</li><li>opts.address: Deposits with specific address.</li><li>opts.format: Custom format of data set. Enum: ['all', 'csv']</li></ul> | Retrieve list of the user's deposits by admin |
+
+
+
 ### Websocket
 
 #### Functions
