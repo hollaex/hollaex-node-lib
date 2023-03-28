@@ -1810,7 +1810,7 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'POST';
-		let path = `${this.baseUrl}/admin/user/address`;
+		let path = `${this.baseUrl}/admin/user/wallet`;
 		const data = {
 			user_id: userId,
 			crypto
