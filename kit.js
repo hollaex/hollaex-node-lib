@@ -760,11 +760,11 @@ class HollaExKit {
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${opts.endDate}`;
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isBoolean(opts.status)) {
@@ -886,11 +886,11 @@ class HollaExKit {
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${opts.endDate}`;
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isBoolean(opts.status)) {
@@ -1403,11 +1403,11 @@ class HollaExKit {
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&end_date=${opts.startDate}`;
+			path += `&end_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
@@ -1495,11 +1495,11 @@ class HollaExKit {
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${opts.endDate}`;
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		const headers = generateHeaders(
@@ -1611,11 +1611,11 @@ class HollaExKit {
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${opts.endDate}`;
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
@@ -1927,11 +1927,11 @@ class HollaExKit {
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${opts.endDate}`;
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
@@ -2042,11 +2042,11 @@ class HollaExKit {
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${opts.startDate}`;
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${opts.endDate}`;
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 	
