@@ -1853,7 +1853,7 @@ class HollaExKit {
 	/**
 	 * Create bank account for user by admin
 	 * @param {number} userId - The identifier of the user
-	 * @param {object} bankAccount - Object with bank account info
+	 * @param {object} bankAccount - Array of objects with bank account info
 	 * @return {object} A JSON object with bank account info
 	 */
 	createExchangeUserBank(userId, bankAccount) {
