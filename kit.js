@@ -1830,6 +1830,95 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
+
+	/**
+	 * Retrieve users' wallets by admin
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.userId - The identifier of the user to filter by
+	 * @param {number} opts.limit - Amount of users per page. Maximum: 50. Default: 50
+	 * @param {string} opts.currency - The currency to filter by
+	 * @param {number} opts.page - Page of user data. Default: 1
+	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
+	 * @param {string} opts.order - Ascending (asc) or descending (desc).
+	 * @param {string} opts.createdAt - Creation date of query in ISO8601 format.
+	 * @param {string} opts.address - Address of crypto
+	 * @param {boolean} opts.isValid - Specify whether or not wallet is valid
+	 * @param {string} opts.network - Crypto network of currency
+	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
+	 * @return {object} A JSON object with user data
+	 * 
+	 */
+	getExchangeUserWallet(
+		opts = {
+			userId: null,
+			limit: null,
+			page: null,
+			currency: null,
+			orderBy: null,
+			order: null,
+			createdAt: null,
+			address: null,
+			isValid: null,
+			network: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/user/wallet?`;
+
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
+		}
+	
+		if (isString(opts.currency)) {
+			path += `&currency=${opts.currency}`;
+		}
+		
+		if (isString(opts.address)) {
+			path += `&address=${opts.address}`;
+		}
+
+		if (isString(opts.network)) {
+			path += `&network=${opts.network}`;
+		}
+
+		if (isBoolean(opts.isValid)) {
+			path += `&is_valid=${opts.isValid}`;
+		}
+	
+		if (isNumber(opts.limit)) {
+			path += `&limit=${opts.limit}`;
+		}
+	
+		if (isNumber(opts.page)) {
+			path += `&page=${opts.page}`;
+		}
+	
+		if (isString(opts.orderBy)) {
+			path += `&order_by=${opts.orderBy}`;
+		}
+	
+		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
+			path += `&order=${opts.order}`;
+		}
+	
+		if (isDatetime(opts.createdAt)) {
+			path += `&created_at=${sanitizeDate(opts.createdAt)}`;
+		}
+	
+		if (isString(opts.format) && opts.format === 'csv') {
+			path += `&format=${opts.format}`;
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
 	
 	/**
 	 * Retrieve user's login info by admin
