@@ -1916,7 +1916,6 @@ class HollaExKit {
 			path += `&format=${opts.format}`;
 		}
 	
-		console.log({path})
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
