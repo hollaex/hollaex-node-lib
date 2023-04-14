@@ -1840,7 +1840,8 @@ class HollaExKit {
 	 * @param {number} opts.page - Page of user data. Default: 1
 	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
 	 * @param {string} opts.order - Ascending (asc) or descending (desc).
-	 * @param {string} opts.createdAt - Creation date of query in ISO8601 format.
+	 * @param {string} opts.startDate - Start date of query in ISO8601 format.
+	 * @param {string} opts.endDate - End date of query in ISO8601 format.
 	 * @param {string} opts.address - Address of crypto
 	 * @param {boolean} opts.isValid - Specify whether or not wallet is valid
 	 * @param {string} opts.network - Crypto network of currency
@@ -1856,7 +1857,8 @@ class HollaExKit {
 			currency: null,
 			orderBy: null,
 			order: null,
-			createdAt: null,
+			startDate: null,
+			endDate: null,
 			address: null,
 			isValid: null,
 			network: null,
@@ -1902,8 +1904,12 @@ class HollaExKit {
 			path += `&order=${opts.order}`;
 		}
 	
-		if (isDatetime(opts.createdAt)) {
-			path += `&created_at=${sanitizeDate(opts.createdAt)}`;
+		if (isDatetime(opts.startDate)) {
+			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+		}
+
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
