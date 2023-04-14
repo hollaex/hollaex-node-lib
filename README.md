@@ -149,6 +149,7 @@ Here is the list of channels you can subscribe to:
 - `wallet` (Only available with authentication. Receive balance updates)
 - `deposit` (Only available with authentication. Receive deposit notifications)
 - `withdrawal` (Only available with authentication. Receive withdrawal notifications)
+- `admin` (Only available with authentication for the exchange administrator. Receive exchange operations such as deposits and withdrawals of all users)
 
 
 For public channels (`orderbook`, `trade`), you can subscribe to specific symbols as follows:
