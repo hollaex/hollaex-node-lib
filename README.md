@@ -143,9 +143,10 @@ client.unsubscribe(['orderbook']);
 
 Here is the list of channels you can subscribe to:
 
-- `orderbook`
-- `trades`
+- `orderbook` (Available publicly)
+- `trade` (Available publicly)
 - `order` (Only available with authentication. Receive order updates)
+- `usertrade` (Only available with authentication. Receive user trades)
 - `wallet` (Only available with authentication. Receive balance updates)
 - `deposit` (Only available with authentication. Receive deposit notifications)
 - `withdrawal` (Only available with authentication. Receive withdrawal notifications)
