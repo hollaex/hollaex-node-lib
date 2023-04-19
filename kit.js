@@ -993,7 +993,7 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 
-    /**
+	/**
 	 * Create exchange deposit by admin
 	 * @param {number} userId - The identifier of the user
 	 * @param {string} currency - The currency to specify
@@ -1370,7 +1370,6 @@ class HollaExKit {
 			symbol: null,
 			orderBy: null,
 			order: null,
-			startDate: null,
 			startDate: null,
 			format: null
 		}
@@ -2043,7 +2042,7 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
-    /**
+	/**
 	 * Deactivate exchange user account by admin
 	 * @param {number} userId - The identifier of the user to deactivate their exchange account
 	 * @return {object} A JSON object with message
