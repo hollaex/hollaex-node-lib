@@ -2175,16 +2175,16 @@ class HollaExKit {
 	/**
 	 * Send email to exchange user account by admin
 	 * @param {number} userId - The identifier of the user
-	 * @param {string} mail_type - The mail type for the email payload
+	 * @param {string} mailType - The mail type for the email payload
 	 * @param {object} data - The content of the mail
 	 * @return {object} A JSON object with message
 	 */
-	sendExchangeUserEmail(userId, mail_type, data) {
+	sendExchangeUserEmail(userId, mailType, data) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/send-email`;
 		const data = {
 			user_id: userId,
-			mail_type,
+			mail_type: mailType,
 			data
 		};
 	
