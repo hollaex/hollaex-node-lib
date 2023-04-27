@@ -2172,7 +2172,72 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
+	/**
+	 * Send email to exchange user account by admin
+	 * @param {number} userId - The identifier of the user
+	 * @param {string} mail_type - The mail type for the email payload
+	 * @param {object} data - The content of the mail
+	 * @return {object} A JSON object with message
+	 */
+	sendExchangeUserEmail(userId, mail_type, data) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/send-email`;
+		const data = {
+			user_id: userId,
+			mail_type,
+			data
+		};
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
 
+	/**
+	 * Send email to users with custom html by admin
+	 * @param {array} receivers - The array of emails to send mail
+	 * @param {string} html - The stringified html content
+	 * @param {string} opts.title - The title of the mail
+	 * @param {string} opts.text - The text of the mail
+	 * @return {object} A JSON object with message
+	 */
+	sendRawEmail(receivers, html, opts = {
+		title: null,
+		text: null
+	}) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/send-email/raw`;
+		const data = {
+			receivers,
+			html,
+		};
+
+		if(isString(opts.title)) {
+			data.title = opts.title
+		}
+		
+		if(isString(opts.text)) {
+			data.text = opts.text
+		}
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
+	
 	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
