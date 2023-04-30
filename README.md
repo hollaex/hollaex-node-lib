@@ -107,6 +107,8 @@ client
 | `deactivateExchangeUserOtp` | <ul><li>**userId**: The identifier of the user to deactivate their otp</li></ul> | Deactivate user otp by admin |
 | `getExchangeUserReferrals` | <ul><li>**userId**: The identifier of the user to filter by</li><li>**opts.limit**: Amount of referrals per page. Maximum: 50. Default: 50</li><li>**opts.page**: Page of referral data. Default: 1</li><li>**opts.orderBy**: The field to order data by e.g. amount, id.</li><li>**opts.order**: Ascending (asc) or descending (desc).</li><li>**opts.startDate**: Start date of query in ISO8601 format.</li><li>**opts.endDate**: End date of query in ISO8601 format.</li></ul> | Retrieve user's referrals info by admin |
 | `getExchangeUserReferrer` | <ul><li>**userId**: The identifier of the user to filter by</li></ul> | Retrieve user's referer info by admin |
+| `sendExchangeUserEmail` | <ul><li>**userId**:  The identifier of the user</li><li>**mailType**: The mail type for the email payload</li><li>**data**: The content of the mail</li></ul> | Send email to exchange user account by admin |
+| `sendRawEmail` | <ul><li>**receivers**:  The array of emails to send mail</li><li>**html**: The stringified html content</li><li>**opts.title**:  The title of the mail</li><li>**opts.text**:  The text of the mail</li></ul> | Send email to users with custom html by admin |
 
 
 ### Websocket
