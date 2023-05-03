@@ -2179,13 +2179,13 @@ class HollaExKit {
 	 * @param {object} data - The content of the mail
 	 * @return {object} A JSON object with message
 	 */
-	sendExchangeUserEmail(userId, mailType, data) {
+	sendExchangeUserEmail(userId, mailType, content) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/send-email`;
 		const data = {
 			user_id: userId,
 			mail_type: mailType,
-			data
+			data: content
 		};
 	
 		const headers = generateHeaders(
