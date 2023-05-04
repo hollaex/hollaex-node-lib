@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const moment = require('moment');
 const { createRequest, createSignature, generateHeaders, isDatetime, sanitizeDate } = require('./utils');
 const { setWsHeartbeat } = require('ws-heartbeat/client');
-const { each, union, isNumber, isString, isPlainObject, isBoolean, isObject, isArray } = require('lodash');
+const { each, union, isNumber, isString, isPlainObject, isBoolean, isObject } = require('lodash');
 class HollaExKit {
 	constructor(
 		opts = {
@@ -27,10 +27,13 @@ class HollaExKit {
 		};
 		this.ws = null;
 		const [protocol, endpoint] = this.apiUrl.split('://');
-		this.wsUrl =
-			protocol === 'https'
-				? `wss://${endpoint}/stream`
-				: `ws://${endpoint}/stream`;
+		this.wsUrl = (
+			opts.wsURL
+				? opts.wsURL
+				: protocol === 'https'
+					? `wss://${endpoint}/stream`
+					: `ws://${endpoint}/stream`
+		);
 		this.wsEvents = [];
 		this.wsReconnect = true;
 		this.wsReconnectInterval = 5000;

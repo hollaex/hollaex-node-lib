@@ -12,12 +12,15 @@ const hollaex = require('hollaex-node-lib');
 const client = new hollaex();
 ```
 
-You can pass the `apiURL` and `baseURL` of the HollaEx-Enabled exchange to connect to. You can also pass your `apiKey` and `apiSecret` generated from the HollaEx-Enabled exchange.
+You can pass custom `apiURL`, `wsURL` and `baseURL` of the HollaEx-Enabled exchange to connect to. `apiURL` is `https://api.hollaex.com` for HollaEx Pro and for your custom exchange it would be something like `https://myexchange.com/api`.
+`wsURL` is the websocket URL for the socket connection and you should pass your stream URL. For HollaEx Pro it is `wss://api.hollaex.com/stream` and for your exchange it would be something like `wss://myexchange.com/stream`.
+
+You can also pass your `apiKey` and `apiSecret` generated from the HollaEx-Enabled exchange to use private requests that require authentication. For public endpoints `apiKey` and `apiSecret` are not required.
 
 ```javascript
 const client = new hollaex({
 	apiURL: '<EXCHANGE_API_URL>',
-	baseURL: '<EXCHANGE_BASE_URL>',
+	wsURL: '<EXCHANGE_WS_URL>',
 	apiKey: '<MY_API_KEY>',
 	apiSecret: '<MY_API_SECRET>'
 });
@@ -30,7 +33,7 @@ You can also pass the field `apiExpiresAfter` which is the length of time in sec
 ```javascript
 const client = new hollaex({
 	apiURL: '<EXCHANGE_API_URL>',
-	baseURL: '<EXCHANGE_BASE_URL>',
+	wsURL: '<EXCHANGE_API_URL>',
 	apiKey: '<MY_API_KEY>',
 	apiSecret: '<MY_API_SECRET>'
 });
