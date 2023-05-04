@@ -3,7 +3,13 @@ require('dotenv').load();
 
 const API_KEY = process.env.API_KEY || '';
 const API_SECRET = process.env.API_SECRET || '';
-const client = new HollaEx({ apiKey: API_KEY, apiSecret: API_SECRET });
+const client = new HollaEx({
+	apiURL: 'https://api.hollaex.com',
+	wsURL: 'wss://api.hollaex.com/stream',
+	baseURL: '/v2',
+	apiKey: API_KEY,
+	apiSecret: API_SECRET
+});
 
 client
 	.getTicker('xht-usdt')
@@ -22,7 +28,7 @@ client
 	symbols : xht-usdt
 */
 
-client.connect(['orderbook']);
+client.connect(['orderbook:xht-usdt']);
 
 client.ws.on('message', (data) => {
 	data = JSON.parse(data);
