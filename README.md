@@ -13,7 +13,7 @@ const client = new hollaex();
 ```
 
 You can pass custom `apiURL`, `wsURL` and `baseURL` of the HollaEx-Enabled exchange to connect to. `apiURL` is `https://api.hollaex.com` for HollaEx Pro and for your custom exchange it would be something like `https://myexchange.com/api`.
-`wsURL` is the websocket URL for the socket connection and you should pass your stream URL. For HollaEx Pro it is `wss://api.hollaex.com/stream` and for your exchange it would be something like `wss://myexchange.com/stream`.
+`wsURL` is the websocket URL for the socket connection and you should pass your stream URL. For HollaEx Pro it is `wss://api.hollaex.com/stream` and for your exchange it would be something like `wss://myexchange.com/stream`. `baseURL` is not required and it is set by default to `/v2` unless you need to connect to an older version of HollaEx.
 
 You can also pass your `apiKey` and `apiSecret` generated from the HollaEx-Enabled exchange to use private requests that require authentication. For public endpoints `apiKey` and `apiSecret` are not required.
 
