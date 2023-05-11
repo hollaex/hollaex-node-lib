@@ -1374,6 +1374,7 @@ class HollaExKit {
 			orderBy: null,
 			order: null,
 			startDate: null,
+			endDate: null,
 			format: null
 		}
 	) {
@@ -1408,8 +1409,8 @@ class HollaExKit {
 			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
-		if (isDatetime(opts.startDate)) {
-			path += `&end_date=${sanitizeDate(opts.startDate)}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && opts.format === 'csv') {
