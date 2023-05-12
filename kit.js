@@ -1413,7 +1413,7 @@ class HollaExKit {
 			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(format)) {
 			path += `&format=${opts.format}`;
 		}
 	
