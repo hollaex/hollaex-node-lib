@@ -473,7 +473,7 @@ class HollaExKit {
 			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
-		if (isString(opts.format)) {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 
@@ -798,7 +798,7 @@ class HollaExKit {
 			path += `&address=${opts.address}`;
 		}
 
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 
@@ -916,7 +916,7 @@ class HollaExKit {
 			path += `&waiting=${opts.waiting}`;
 		}
 
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 
@@ -1374,6 +1374,7 @@ class HollaExKit {
 			orderBy: null,
 			order: null,
 			startDate: null,
+			endDate: null,
 			format: null
 		}
 	) {
@@ -1408,11 +1409,11 @@ class HollaExKit {
 			path += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
-		if (isDatetime(opts.startDate)) {
-			path += `&end_date=${sanitizeDate(opts.startDate)}`;
+		if (isDatetime(opts.endDate)) {
+			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 	
@@ -1620,7 +1621,7 @@ class HollaExKit {
 			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 	
@@ -1914,7 +1915,7 @@ class HollaExKit {
 			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 	
@@ -2031,7 +2032,7 @@ class HollaExKit {
 			path += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
-		if (isString(opts.format) && opts.format === 'csv') {
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
 	
