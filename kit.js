@@ -675,6 +675,44 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
+	/**
+	 * Retrieve price conversion
+	 * @param {array} assets - Assets to convert
+	 * @param {string} opts.quote - Quote coin to convert to
+	 * @param {number} opts.amount - Amount to convert
+	 * @return {object} A JSON object with conversion info
+	 */
+	getOraclePrice(
+		assets, 
+		opts = {
+			quote: null,
+			amount: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/oracle/prices?`;
+
+		if (isArray(assets)) {
+			path += `&assets=${assets}`;
+		}
+
+		if (isString(opts.quote)) {
+			path += `&quote=${opts.quote}`;
+		}
+		
+		if (isNumber(opts.amount)) {
+			path += `&amount=${opts.amount}`;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
 
 	/**
 	 * Get admin exchange information
