@@ -112,6 +112,7 @@ client
 | `getExchangeUserReferrer` | <ul><li>**userId**: The identifier of the user to filter by</li></ul> | Retrieve user's referer info by admin |
 | `sendExchangeUserEmail` | <ul><li>**userId**:  The identifier of the user</li><li>**mailType**: The mail type for the email payload</li><li>**data**: The content of the mail</li></ul> | Send email to exchange user account by admin |
 | `sendRawEmail` | <ul><li>**receivers**:  The array of emails to send mail</li><li>**html**: The stringified html content</li><li>**opts.title**:  The title of the mail</li><li>**opts.text**:  The text of the mail</li></ul> | Send email to users with custom html by admin |
+| `getOraclePrice` | <ul><li>**assets**:  Assets to convert</li><li>**opts.quote**: Quote coin to convert to</li><li>**opts.amount**:  Amount to convert</li></ul> | Retrieve price conversion |
 
 
 ### Websocket
