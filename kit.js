@@ -2279,7 +2279,46 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 	
-	
+	/**
+	 * Retrieve user's balances by admin
+	 * @param {number} opts.userId - The identifier of the user to filter by
+	 * @param {number} opts.currency - The currency to filter by, pass undefined to receive data on all currencies
+	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
+	 * @return {object} A JSON object with referral info
+	 */
+		getExchangeUserBalances(
+			opts = {
+				userId: null,
+				currency: null,
+				format: null
+			}
+		) {
+			const verb = 'GET';
+			let path = `${this.baseUrl}/admin/balances?`;
+		
+			
+			if (isNumber(opts.userId)) {
+				path += `&user_id=${opts.userId}`;
+			}
+			
+			if (isString(opts.currency)) {
+				path += `&currency=${opts.currency}`;
+			}
+			
+			if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+				path += `&format=${opts.format}`;
+			}
+		
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers);
+		}
+
 	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
