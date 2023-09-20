@@ -714,6 +714,54 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
+	
+	/**
+	 * Get trade history HOLCV for all pairs
+	 * @param {array} assets - The list of assets to get the mini charts for
+	 * @param {string} opts.from - Start Date
+	 * @param {string} opts.to - End data
+	 * @param {string} opts.quote - Quote asset to receive prices based on
+	 * @return {object} A JSON object with trade history info
+	 */
+	getMiniCharts(
+		assets,
+		opts = {
+			from: null,
+			to: null,
+			quote: null,
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/minicharts?`;
+		
+		if (isArray(assets)) {
+			path += `&assets=${opts.assets}`;
+		}
+	
+		if (isString(opts.from)) {
+			path += `&from=${opts.from}`;
+		}
+	
+		if (isString(opts.to)) {
+			path += `&to=${opts.to}`;
+		}
+	
+		if (isString(opts.quote)) {
+			path += `&quote=${opts.quote}`;
+		}
+	
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+	
+
 	/**
 	 * Get admin exchange information
 	 * @return {object} A json object with the admin exchange information
