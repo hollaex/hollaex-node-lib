@@ -79,6 +79,7 @@ client
 | `createOrder` | <ul><li>**symbol**: HollaEx trading symbol e.g. `xht-usdt`</li><li>**side** (_enum_=[`buy`, `sell`]): Order side</li><li>**size**: Size of order to place</li><li>**type**: (_enum_=[`market`, `limit`] Order type</li><li>**price**: (_required if limit order type_) Order price</li><li>**opts**: Object with additional params</li><li>**opts.stop**: (_optional_) Stop price for order</li><li>**opts.meta**: (_optional_) Object with additional meta configurations</li><li>**opts.meta.post_only**: (_optional_, _default_=`false`) Make post only order </li><li>**opts.meta.note**: (_optional_) Custom note for order</li></ul> | Create a new order |
 | `cancelOrder` | <ul><li>**orderId**: HollaEx Network order ID</li></ul> | Cancel a specific order with its ID |
 | `cancelAllOrders` | <ul><li>**symbol**: HollaEx trading symbol e.g. `xht-usdt`</li></ul> | Cancel all the active orders of a user, filtered by currency pair symbol |
+| `getMiniCharts` | <ul><li>**assets**: The list of assets to get the mini charts for</li><li>**opts.from**: (_optional_) Start Date</li><li>**opts.to**: (_optional_) End Date</li><li>**opts.quote**: (_optional_) Quote asset to receive prices based on</li></ul> | Get trade history HOLCV for all pairs |
 
 ### Available admin functions:
 
