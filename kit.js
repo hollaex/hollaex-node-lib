@@ -207,63 +207,66 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/user/deposits?`;
+		let path = `${this.baseUrl}/user/deposits`;
+		let params = '?'
 
 		if (isString(opts.currency)) {
-			path += `&currency=${opts.currency}`;
+			params += `&currency=${opts.currency}`;
 		}
 
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order)) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isString(opts.address)) {
-			path += `&address=${opts.address}`;
+			params += `&address=${opts.address}`;
 		}
 
 		if (isString(opts.transactionId)) {
-			path += `&transaction_id=${opts.transactionId}`;
+			params += `&transaction_id=${opts.transactionId}`;
 		}
 
 		if (isBoolean(opts.status)) {
-			path += `&status=${opts.status}`;
+			params += `&status=${opts.status}`;
 		}
 
 		if (isBoolean(opts.dismissed)) {
-			path += `&dismissed=${opts.dismissed}`;
+			params += `&dismissed=${opts.dismissed}`;
 		}
 
 		if (isBoolean(opts.rejected)) {
-			path += `&rejected=${opts.rejected}`;
+			params += `&rejected=${opts.rejected}`;
 		}
 
 		if (isBoolean(opts.processing)) {
-			path += `&processing=${opts.processing}`;
+			params += `&processing=${opts.processing}`;
 		}
 
 		if (isBoolean(opts.waiting)) {
-			path += `&waiting=${opts.waiting}`;
+			params += `&waiting=${opts.waiting}`;
 		}
+
+		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
 			this.headers,
@@ -314,64 +317,65 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/user/withdrawals?`;
+		let path = `${this.baseUrl}/user/withdrawals`;
+		let params = '?'
 
 		if (isString(opts.currency)) {
-			path += `&currency=${opts.currency}`;
+			params += `&currency=${opts.currency}`;
 		}
 
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order)) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isString(opts.address)) {
-			path += `&address=${opts.address}`;
+			params += `&address=${opts.address}`;
 		}
 
 		if (isString(opts.transactionId)) {
-			path += `&transaction_id=${opts.transactionId}`;
+			params += `&transaction_id=${opts.transactionId}`;
 		}
 
 		if (isBoolean(opts.status)) {
-			path += `&status=${opts.status}`;
+			params += `&status=${opts.status}`;
 		}
 
 		if (isBoolean(opts.dismissed)) {
-			path += `&dismissed=${opts.dismissed}`;
+			params += `&dismissed=${opts.dismissed}`;
 		}
 
 		if (isBoolean(opts.rejected)) {
-			path += `&rejected=${opts.rejected}`;
+			params += `&rejected=${opts.rejected}`;
 		}
 
 		if (isBoolean(opts.processing)) {
-			path += `&processing=${opts.processing}`;
+			params += `&processing=${opts.processing}`;
 		}
 
 		if (isBoolean(opts.waiting)) {
-			path += `&waiting=${opts.waiting}`;
+			params += `&waiting=${opts.waiting}`;
 		}
-
+		if (params.length > 1) path += params;
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -443,39 +447,42 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/user/trades?`;
+		let path = `${this.baseUrl}/user/trades`;
+		let params = '?';
 
 		if (isString(opts.symbol)) {
-			path += `&symbol=${opts.symbol}`;
+			params += `&symbol=${opts.symbol}`;
 		}
 
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order)) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
+
+		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
 			this.headers,
@@ -534,47 +541,50 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/orders?`;
+		let path = `${this.baseUrl}/orders`;
+		let params = '?';
 
 		if (isString(opts.symbol)) {
-			path += `&symbol=${opts.symbol}`;
+			params += `&symbol=${opts.symbol}`;
 		}
 
 		if (isString(opts.side) && (opts.side.toLowerCase() === 'buy' || opts.side.toLowerCase() === 'sell')) {
-			path += `&side=${opts.side}`;
+			params += `&side=${opts.side}`;
 		}
 
 		if (isString(opts.status)) {
-			path += `&status=${opts.status}`;
+			params += `&status=${opts.status}`;
 		}
 
 		if (isBoolean(opts.open)) {
-			path += `&open=${opts.open}`;
+			params += `&open=${opts.open}`;
 		}
 
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order)) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
+
+		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
 			this.headers,
@@ -690,19 +700,21 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/oracle/prices?`;
+		let path = `${this.baseUrl}/oracle/prices`;
+		let params = '?';
 
 		if (isArray(assets)) {
-			path += `&assets=${assets}`;
+			params += `&assets=${assets}`;
 		}
 
 		if (isString(opts.quote)) {
-			path += `&quote=${opts.quote}`;
+			params += `&quote=${opts.quote}`;
 		}
 		
 		if (isNumber(opts.amount)) {
-			path += `&amount=${opts.amount}`;
+			params += `&amount=${opts.amount}`;
 		}
+		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
 			this.headers,
@@ -732,24 +744,26 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/minicharts?`;
-		
+		let path = `${this.baseUrl}/minicharts`;
+		let params = '?';
+
 		if (isArray(assets)) {
-			path += `&assets=${opts.assets}`;
+			params += `&assets=${opts.assets}`;
 		}
 	
 		if (isString(opts.from)) {
-			path += `&from=${opts.from}`;
+			params += `&from=${opts.from}`;
 		}
 	
 		if (isString(opts.to)) {
-			path += `&to=${opts.to}`;
+			params += `&to=${opts.to}`;
 		}
 	
 		if (isString(opts.quote)) {
-			path += `&quote=${opts.quote}`;
+			params += `&quote=${opts.quote}`;
 		}
 	
+		if (params.length > 1) path += params;
 	
 		const headers = generateHeaders(
 			this.headers,
@@ -821,72 +835,74 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/deposits?`;
-
+		let path = `${this.baseUrl}/admin/deposits`;
+		let params = '?';
 		
 		if (isNumber(opts.userId)) {
-			path += `&user_id=${opts.userId}`;
+			params += `&user_id=${opts.userId}`;
 		}
 
 		if (isString(opts.currency)) {
-			path += `&currency=${opts.currency}`;
+			params += `&currency=${opts.currency}`;
 		}
 
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isBoolean(opts.status)) {
-			path += `&status=${opts.status}`;
+			params += `&status=${opts.status}`;
 		}
 
 		if (isBoolean(opts.dismissed)) {
-			path += `&dismissed=${opts.dismissed}`;
+			params += `&dismissed=${opts.dismissed}`;
 		}
 
 		if (isBoolean(opts.rejected)) {
-			path += `&rejected=${opts.rejected}`;
+			params += `&rejected=${opts.rejected}`;
 		}
 
 		if (isBoolean(opts.processing)) {
-			path += `&processing=${opts.processing}`;
+			params += `&processing=${opts.processing}`;
 		}
 
 		if (isBoolean(opts.waiting)) {
-			path += `&waiting=${opts.waiting}`;
+			params += `&waiting=${opts.waiting}`;
 		}
 
 		if (isString(opts.transactionId)) {
-			path += `&transaction_id=${opts.transactionId}`;
+			params += `&transaction_id=${opts.transactionId}`;
 		}
 
 		if (isString(opts.address)) {
-			path += `&address=${opts.address}`;
+			params += `&address=${opts.address}`;
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
+
+		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
 			this.headers,
@@ -940,72 +956,74 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/withdrawals?`;
+		let path = `${this.baseUrl}/admin/withdrawals`;
+		let params = '?';
 
 		if (isString(opts.currency)) {
-			path += `&currency=${opts.currency}`;
+			params += `&currency=${opts.currency}`;
 		}
 
 		if (isNumber(opts.userId)) {
-			path += `&user_id=${opts.userId}`;
+			params += `&user_id=${opts.userId}`;
 		}
 
 		if (isString(opts.transactionId)) {
-			path += `&transaction_id=${opts.transactionId}`;
+			params += `&transaction_id=${opts.transactionId}`;
 		}
 
 		if (isString(opts.address)) {
-			path += `&address=${opts.address}`;
+			params += `&address=${opts.address}`;
 		}
 
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (isBoolean(opts.status)) {
-			path += `&status=${opts.status}`;
+			params += `&status=${opts.status}`;
 		}
 
 		if (isBoolean(opts.dismissed)) {
-			path += `&dismissed=${opts.dismissed}`;
+			params += `&dismissed=${opts.dismissed}`;
 		}
 
 		if (isBoolean(opts.rejected)) {
-			path += `&rejected=${opts.rejected}`;
+			params += `&rejected=${opts.rejected}`;
 		}
 
 		if (isBoolean(opts.processing)) {
-			path += `&processing=${opts.processing}`;
+			params += `&processing=${opts.processing}`;
 		}
 
 		if (isBoolean(opts.waiting)) {
-			path += `&waiting=${opts.waiting}`;
+			params += `&waiting=${opts.waiting}`;
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
 
+		if (params.length > 1) path += params;
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1054,7 +1072,7 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'POST';
-		let path = `${this.baseUrl}/admin/transfer?`;
+		let path = `${this.baseUrl}/admin/transfer`;
 		const data = {
 			sender_id: senderId,
 			receiver_id: receiverId,
@@ -1168,7 +1186,7 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'PUT';
-		let path = `${this.baseUrl}/admin/mint?`;
+		let path = `${this.baseUrl}/admin/mint`;
 		const data = {
 			transaction_id: transactionId
 		};
@@ -1244,7 +1262,7 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'POST';
-		let path = `${this.baseUrl}/admin/burn?`;
+		let path = `${this.baseUrl}/admin/burn`;
 		const data = {
 			user_id: userId,
 			currency,
@@ -1307,7 +1325,7 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'PUT';
-		let path = `${this.baseUrl}/admin/burn?`;
+		let path = `${this.baseUrl}/admin/burn`;
 		const data = {
 			transaction_id: transactionId
 		};
@@ -1379,27 +1397,31 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/check-transaction?`;
-	
+		let path = `${this.baseUrl}/admin/check-transaction`;
+		let params = '?';
+
 		if (isString(currency)) {
-			path += `&currency=${currency}`;
+			params += `&currency=${currency}`;
 		}
 	
 		if (isString(transactionId)) {
-			path += `&transaction_id=${transactionId}`;
+			params += `&transaction_id=${transactionId}`;
 		}
 	
 		if (isString(address)) {
-			path += `&address=${address}`;
+			params += `&address=${address}`;
 		}
 	
 		if (isString(network)) {
-			path += `&network=${network}`;
+			params += `&network=${network}`;
 		}
 	
 		if (isBoolean(opts.isTestnet)) {
-			path += `&is_testnet=${opts.isTestnet}`;
+			params += `&is_testnet=${opts.isTestnet}`;
 		}
+
+		if (params.length > 1) path += params;
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1465,43 +1487,46 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/trades?`;
+		let path = `${this.baseUrl}/admin/trades`;
+		let params = '?';
 		
 		if (isNumber(opts.userId)) {
-			path += `&user_id=${opts.userId}`;
+			params += `&user_id=${opts.userId}`;
 		}
 	
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 	
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 	
 		if (isString(opts.symbol)) {
-			path += `&symbol=${opts.symbol}`;
+			params += `&symbol=${opts.symbol}`;
 		}
 	
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
+
+		if (params.length > 1) path += params;
 	
 		const headers = generateHeaders(
 			this.headers,
@@ -1545,51 +1570,54 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/orders?`;
+		let path = `${this.baseUrl}/admin/orders`;
+		let params = '?';
 		
 		if (isNumber(opts.userId)) {
-			path += `&user_id=${opts.userId}`;
+			params += `&user_id=${opts.userId}`;
 		}
 	
 		if (isString(opts.side) && (opts.side === 'buy' || opts.side === 'sell')) {
-			path += `&side=${opts.side}`;
+			params += `&side=${opts.side}`;
 		}
 		
 		if (isString(opts.status)) {
-			path += `&status=${opts.status}`;
+			params += `&status=${opts.status}`;
 		}
 	
 		if (isBoolean(opts.open)) {
-			path += `&open=${opts.open}`;
+			params += `&open=${opts.open}`;
 		}
 	
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 	
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 	
 		if (isString(opts.symbol)) {
-			path += `&symbol=${opts.symbol}`;
+			params += `&symbol=${opts.symbol}`;
 		}
 	
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
+
+		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
 			this.headers,
@@ -1609,15 +1637,18 @@ class HollaExKit {
 	 */
 	cancelExchangeUserOrder(userId, orderId) {
 		const verb = 'DELETE';
-		let path = `${this.baseUrl}/admin/order?`;
+		let path = `${this.baseUrl}/admin/order`;
+		let params = '?';
 	
 		if (isString(orderId)) {
-			path += `&order_id=${orderId}`;
+			params += `&order_id=${orderId}`;
 		}
 	
 		if (isNumber(userId)) {
-			path += `&user_id=${userId}`;
+			params += `&user_id=${userId}`;
 		}
+
+		if (params.length > 1) path += params;
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1661,55 +1692,57 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/users?`;
+		let path = `${this.baseUrl}/admin/users`;
+		let params = '?';
 		
 		if (isNumber(opts.userId)) {
-			path += `&id=${opts.userId}`;
+			params += `&id=${opts.userId}`;
 		}
 	
 		if (isString(opts.search)) {
-			path += `&search=${opts.search}`;
+			params += `&search=${opts.search}`;
 		}
 		
 		if (isString(opts.type)) {
-			path += `&type=${opts.type}`;
+			params += `&type=${opts.type}`;
 		}
 	
 		if (isBoolean(opts.pending)) {
-			path += `&pending=${opts.pending}`;
+			params += `&pending=${opts.pending}`;
 		}
 	
 		if (isString(opts.pendingType) && (opts.pendingType === 'id' ||opts.pendingType === 'bank')) {
-			path += `&pending_type=${opts.pendingType}`;
+			params += `&pending_type=${opts.pendingType}`;
 		}
 	
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 	
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 	
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
+		if (params.length > 1) path += params;
 	
 		const headers = generateHeaders(
 			this.headers,
@@ -1955,55 +1988,58 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/user/wallet?`;
+		let path = `${this.baseUrl}/admin/user/wallet`;
+		let params = '?';
 
 		if (isNumber(opts.userId)) {
-			path += `&user_id=${opts.userId}`;
+			params += `&user_id=${opts.userId}`;
 		}
 	
 		if (isString(opts.currency)) {
-			path += `&currency=${opts.currency}`;
+			params += `&currency=${opts.currency}`;
 		}
 		
 		if (isString(opts.address)) {
-			path += `&address=${opts.address}`;
+			params += `&address=${opts.address}`;
 		}
 
 		if (isString(opts.network)) {
-			path += `&network=${opts.network}`;
+			params += `&network=${opts.network}`;
 		}
 
 		if (isBoolean(opts.isValid)) {
-			path += `&is_valid=${opts.isValid}`;
+			params += `&is_valid=${opts.isValid}`;
 		}
 	
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 	
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 	
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
+
+		if (params.length > 1) path += params;
 	
 		const headers = generateHeaders(
 			this.headers,
@@ -2088,40 +2124,43 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/logins?`;
+		let path = `${this.baseUrl}/admin/logins`;
+		let params = '?';
 		
 		if (isNumber(opts.userId)) {
-			path += `&user_id=${opts.userId}`;
+			params += `&user_id=${opts.userId}`;
 		}
 	
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 	
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 	
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 	
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-			path += `&format=${opts.format}`;
+			params += `&format=${opts.format}`;
 		}
 	
+		if (params.length > 1) path += params;
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2202,36 +2241,38 @@ class HollaExKit {
 		}
 	) {
 		const verb = 'GET';
-		let path = `${this.baseUrl}/admin/user/affiliation?`;
-	
+		let path = `${this.baseUrl}/admin/user/affiliation`;
+		let params = '?';
 		
 		if (isNumber(userId)) {
-			path += `&user_id=${userId}`;
+			params += `&user_id=${userId}`;
 		}
 	
 		if (isNumber(opts.limit)) {
-			path += `&limit=${opts.limit}`;
+			params += `&limit=${opts.limit}`;
 		}
 	
 		if (isNumber(opts.page)) {
-			path += `&page=${opts.page}`;
+			params += `&page=${opts.page}`;
 		}
 	
 		if (isString(opts.orderBy)) {
-			path += `&order_by=${opts.orderBy}`;
+			params += `&order_by=${opts.orderBy}`;
 		}
 	
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
-			path += `&order=${opts.order}`;
+			params += `&order=${opts.order}`;
 		}
 	
 		if (isDatetime(opts.startDate)) {
-			path += `&start_date=${sanitizeDate(opts.startDate)}`;
+			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
 	
 		if (isDatetime(opts.endDate)) {
-			path += `&end_date=${sanitizeDate(opts.endDate)}`;
+			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
+
+		if (params.length > 1) path += params;
 	
 	
 		const headers = generateHeaders(
