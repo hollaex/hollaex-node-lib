@@ -775,6 +775,76 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 	
+	/**
+	 * Get Quick Trade Quote
+	 * @param {string} spending_currency -  Currency symbol of the spending currency
+	 * @param {string} receiving_currency - Currency symbol of the receiving currency
+	 * @param {string} opts.spending_amount - Spending amount
+	 * @param {string} opts.receiving_amount - Receiving amount
+	 */
+	getQuickTradeQuote(
+		spending_currency,
+		receiving_currency,
+		opts = {
+			spending_amount: null,
+			receiving_amount: null,
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/quick-trade`;
+		let params = '?';
+	
+		if (isString(spending_currency)) {
+			params += `&spending_currency=${spending_currency}`;
+		}
+	
+		if (isString(receiving_currency)) {
+			params += `&receiving_currency=${receiving_currency}`;
+		}
+
+		if (isString(opts.spending_amount)) {
+			params += `&spending_amount=${opts.spending_amount}`;
+		}
+	
+		if (isString(opts.receiving_amount)) {
+			params += `&receiving_amount=${opts.receiving_amount}`;
+		}
+	
+		if (params.length > 1) path += params;
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	/**
+	 * Execute Order
+	 * @param {string} token - Token
+	 */
+	executeOrder(
+		token
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/order/execute`;
+		const data = {
+			token
+		};
+	
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
 
 	/**
 	 * Get admin exchange information
