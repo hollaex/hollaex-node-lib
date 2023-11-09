@@ -80,6 +80,8 @@ client
 | `cancelOrder` | <ul><li>**orderId**: HollaEx Network order ID</li></ul> | Cancel a specific order with its ID |
 | `cancelAllOrders` | <ul><li>**symbol**: HollaEx trading symbol e.g. `xht-usdt`</li></ul> | Cancel all the active orders of a user, filtered by currency pair symbol |
 | `getMiniCharts` | <ul><li>**assets**: The list of assets to get the mini charts for</li><li>**opts.from**: (_optional_) Start Date</li><li>**opts.to**: (_optional_) End Date</li><li>**opts.quote**: (_optional_) Quote asset to receive prices based on</li></ul> | Get trade history HOLCV for all pairs |
+| `getQuickTradeQuote` | <ul><li>**spending_currency**: Currency symbol of the spending currency</li><li>**receiving_currency**: Currency symbol of the receiving currency</li><li>**opts.spending_amount**: (_optional_) Spending amount</li><li>**opts.receiving_amount**: (_optional_) Receiving amount</li></ul> | Get Quick Trade Quote |
+| `executeOrder` | <ul><li>**token**: Token</li></ul> | Execute Order |
 
 ### Available admin functions:
 
