@@ -2479,6 +2479,46 @@ class HollaExKit {
 		}
 
 	/**
+	 * Create order on behalf of user
+	 * @param {number} user_id - User id for the order
+	 * @param {string} symbol - Currency symbol of the order e.g. xht-usdt
+	 * @param {number} size - Size of the order
+	 * @param {number} price - Order Price
+	 * @param {string} side - Order Side, buy or sell
+	 * @param {string} type - Order Type, limit or market
+	 */
+		createOrderByAdmin(
+			user_id,
+			symbol,
+			size,
+			price,
+			side,
+			type
+		) {
+			const verb = 'POST';
+			let path = `${this.baseUrl}/admin/order`;
+
+			const data = {
+				user_id,
+				size,
+				side,
+				type,
+				price,
+				symbol
+			};
+		
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
 	 */
