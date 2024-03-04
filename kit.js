@@ -2519,6 +2519,52 @@ class HollaExKit {
 		}
 	
 	/**
+	 * Create trade on behalf of users
+	 * @param {number} maker_id - User id for the maker
+	 * @param {number} taker_id - User id for the taker
+	 * @param {number} maker_fee - fee in percentage for the maker
+	 * @param {number} taker_fee - fee in percentage for the taker
+	 * @param {string} symbol - Currency symbol of the order e.g. xht-usdt
+	 * @param {number} size - Size of the order
+	 * @param {number} price - Order Price
+	 * @param {string} side - Order Side, buy or sell
+	 */
+		createTradeByAdmin(
+			maker_id,
+			taker_id,
+			maker_fee,
+			taker_fee,
+			symbol,
+			size,
+			price,
+			side,
+		) {
+			const verb = 'POST';
+			let path = `${this.baseUrl}/admin/trade`;
+
+			const data = {
+				maker_id,
+				taker_id,
+				maker_fee,
+				taker_fee,
+				symbol,
+				size,
+				price,
+				side,
+			};
+		
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	
+	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
 	 */
