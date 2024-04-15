@@ -2519,6 +2519,93 @@ class HollaExKit {
 		}
 	
 	/**
+	 * Create trade on behalf of users
+	 * @param {number} maker_id - User id for the maker
+	 * @param {number} taker_id - User id for the taker
+	 * @param {number} maker_fee - fee in percentage for the maker
+	 * @param {number} taker_fee - fee in percentage for the taker
+	 * @param {string} symbol - Currency symbol of the order e.g. xht-usdt
+	 * @param {number} size - Size of the order
+	 * @param {number} price - Order Price
+	 * @param {string} side - Order Side, buy or sell
+	 */
+		createTradeByAdmin(
+			maker_id,
+			taker_id,
+			maker_fee,
+			taker_fee,
+			symbol,
+			size,
+			price,
+			side,
+		) {
+			const verb = 'POST';
+			let path = `${this.baseUrl}/admin/trade`;
+
+			const data = {
+				maker_id,
+				taker_id,
+				maker_fee,
+				taker_fee,
+				symbol,
+				size,
+				price,
+				side,
+			};
+		
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+	/**
+	 * Create withdrawal on behalf of users
+	 * @param {number} user_id - User id for the withdrawal process
+	 * @param {string} address - Specific address for the withdrawal
+	 * @param {number} amount - Size of the withdrawal
+	 * @param {string} currency - Currency symbol of the withdrawal
+	 * @param {string} opts.network - Blockchain network
+	 */
+		createWithdrawalByAdmin(
+			user_id,
+			address,
+			amount,
+			currency,
+			opts = {
+				network: null
+			}
+		) {
+			const verb = 'POST';
+			let path = `${this.baseUrl}/admin/withdrawal`;
+
+			const data = {
+				user_id,
+				address,
+				amount,
+				currency
+			};
+		
+			if(isString(opts.network)) {
+				data.network = opts.network;
+			}
+
+			const headers = generateHeaders(
+				this.headers,
+				this.apiSecret,
+				verb,
+				path,
+				this.apiExpiresAfter,
+				data
+			);
+			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		}
+
+	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
 	 */
