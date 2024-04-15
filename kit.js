@@ -208,7 +208,7 @@ class HollaExKit {
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/user/deposits`;
-		let params = '?'
+		let params = '?';
 
 		if (isString(opts.currency)) {
 			params += `&currency=${opts.currency}`;
@@ -318,7 +318,7 @@ class HollaExKit {
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/user/withdrawals`;
-		let params = '?'
+		let params = '?';
 
 		if (isString(opts.currency)) {
 			params += `&currency=${opts.currency}`;
@@ -2420,11 +2420,11 @@ class HollaExKit {
 		};
 
 		if(isString(opts.title)) {
-			data.title = opts.title
+			data.title = opts.title;
 		}
 		
 		if(isString(opts.text)) {
-			data.text = opts.text
+			data.text = opts.text;
 		}
 	
 		const headers = generateHeaders(
@@ -2445,38 +2445,38 @@ class HollaExKit {
 	 * @param {string} opts.format - Custom format of data set. Enum: ['all', 'csv']
 	 * @return {object} A JSON object with referral info
 	 */
-		getExchangeUserBalances(
-			opts = {
-				userId: null,
-				currency: null,
-				format: null
-			}
-		) {
-			const verb = 'GET';
-			let path = `${this.baseUrl}/admin/balances?`;
-		
-			
-			if (isNumber(opts.userId)) {
-				path += `&user_id=${opts.userId}`;
-			}
-			
-			if (isString(opts.currency)) {
-				path += `&currency=${opts.currency}`;
-			}
-			
-			if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
-				path += `&format=${opts.format}`;
-			}
-		
-			const headers = generateHeaders(
-				this.headers,
-				this.apiSecret,
-				verb,
-				path,
-				this.apiExpiresAfter
-			);
-			return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	getExchangeUserBalances(
+		opts = {
+			userId: null,
+			currency: null,
+			format: null
 		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/balances?`;
+		
+			
+		if (isNumber(opts.userId)) {
+			path += `&user_id=${opts.userId}`;
+		}
+			
+		if (isString(opts.currency)) {
+			path += `&currency=${opts.currency}`;
+		}
+			
+		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += `&format=${opts.format}`;
+		}
+		
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
 
 	/**
 	 * Create order on behalf of user
@@ -2487,36 +2487,36 @@ class HollaExKit {
 	 * @param {string} side - Order Side, buy or sell
 	 * @param {string} type - Order Type, limit or market
 	 */
-		createOrderByAdmin(
-			user_id,
-			symbol,
-			size,
-			price,
-			side,
-			type
-		) {
-			const verb = 'POST';
-			let path = `${this.baseUrl}/admin/order`;
+	createOrderByAdmin(
+		user_id,
+		symbol,
+		size,
+		price,
+		side,
+		type
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/order`;
 
-			const data = {
-				user_id,
-				size,
-				side,
-				type,
-				price,
-				symbol
-			};
+		const data = {
+			user_id,
+			size,
+			side,
+			type,
+			price,
+			symbol
+		};
 		
-			const headers = generateHeaders(
-				this.headers,
-				this.apiSecret,
-				verb,
-				path,
-				this.apiExpiresAfter,
-				data
-			);
-			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
-		}
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
 	
 	/**
 	 * Create trade on behalf of users
@@ -2529,7 +2529,20 @@ class HollaExKit {
 	 * @param {number} price - Order Price
 	 * @param {string} side - Order Side, buy or sell
 	 */
-		createTradeByAdmin(
+	createTradeByAdmin(
+		maker_id,
+		taker_id,
+		maker_fee,
+		taker_fee,
+		symbol,
+		size,
+		price,
+		side,
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/trade`;
+
+		const data = {
 			maker_id,
 			taker_id,
 			maker_fee,
@@ -2538,31 +2551,18 @@ class HollaExKit {
 			size,
 			price,
 			side,
-		) {
-			const verb = 'POST';
-			let path = `${this.baseUrl}/admin/trade`;
-
-			const data = {
-				maker_id,
-				taker_id,
-				maker_fee,
-				taker_fee,
-				symbol,
-				size,
-				price,
-				side,
-			};
+		};
 		
-			const headers = generateHeaders(
-				this.headers,
-				this.apiSecret,
-				verb,
-				path,
-				this.apiExpiresAfter,
-				data
-			);
-			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
-		}
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
 	/**
 	 * Create withdrawal on behalf of users
 	 * @param {number} user_id - User id for the withdrawal process
@@ -2571,39 +2571,39 @@ class HollaExKit {
 	 * @param {string} currency - Currency symbol of the withdrawal
 	 * @param {string} opts.network - Blockchain network
 	 */
-		createWithdrawalByAdmin(
+	createWithdrawalByAdmin(
+		user_id,
+		address,
+		amount,
+		currency,
+		opts = {
+			network: null
+		}
+	) {
+		const verb = 'POST';
+		let path = `${this.baseUrl}/admin/withdrawal`;
+
+		const data = {
 			user_id,
 			address,
 			amount,
-			currency,
-			opts = {
-				network: null
-			}
-		) {
-			const verb = 'POST';
-			let path = `${this.baseUrl}/admin/withdrawal`;
-
-			const data = {
-				user_id,
-				address,
-				amount,
-				currency
-			};
+			currency
+		};
 		
-			if(isString(opts.network)) {
-				data.network = opts.network;
-			}
-
-			const headers = generateHeaders(
-				this.headers,
-				this.apiSecret,
-				verb,
-				path,
-				this.apiExpiresAfter,
-				data
-			);
-			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+		if(isString(opts.network)) {
+			data.network = opts.network;
 		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
 
 	/**
 	 * Connect to hollaEx websocket and listen to an event
