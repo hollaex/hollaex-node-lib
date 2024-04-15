@@ -118,6 +118,8 @@ client
 | `getOraclePrice` | <ul><li>**assets**:  Assets to convert</li><li>**opts.quote**: Quote coin to convert to</li><li>**opts.amount**:  Amount to convert</li></ul> | Retrieve price conversion |
 | `getExchangeUserBalances` | <ul><li>**opts.userId**:  The identifier of the user to filter by</li><li>**opts.currency**: The currency to filter by, pass undefined to receive data on all currencies</li><li>**opts.format**: Custom format of data set. Enum: ['all', 'csv']</li></ul> | Retrieve user's balances by admin |
 | `createOrderByAdmin` | <ul><li>**user_id**: User id for the order</li><li>**symbol**: Currency symbol of the order e.g. xht-usdt</li><li>**size**: Amount of the order</li><li>**side**: Order Side, buy or sell</li><li>**type**: Order Type, limit or market</li><li>**price**: Order Price</li></ul> | Create order on behalf of user |
+| `createTradeByAdmin` | <ul><li>**maker_id**: User id for the maker</li><li>**user_id**: User id for the taker</li><li>**user_id**: fee in percentage for the maker</li><li>**user_id**: fee in percentage for the taker</li><li>**symbol**: Currency symbol of the order e.g. xht-usdt</li><li>**size**: Amount of the order</li><li>**side**: Order Side, buy or sell</li><li>**price**: Order Price</li></ul> | Create order on behalf of user |
+| `createWithdrawalByAdmin` | <ul><li>**user_id**: User id for the withdrawal process</li><li>**address**: Specific address for the withdrawal</li><li>**amount**: Size of the withdrawal</li><li>**currency**: Currency symbol of the withdrawal</li><li>**opts.network**: Blockchain network</li></ul> | Create withdrawal on behalf of users |
 
 
 ### Websocket
