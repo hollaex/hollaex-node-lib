@@ -1828,14 +1828,22 @@ class HollaExKit {
 	 * Create exchange user
 	 * @param {string} email - The mail address for the user
 	 * @param {string} password - The password for the user
+	 * @param {string} opts.referral - The referral code for the user
 	 * @return {object} A JSON object with message
 	 */
-	createExchangeUser(email, password) {
+	createExchangeUser(email, password, opts = {
+		referral: null
+	}) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user`;
 		const data = {
 			email,
 			password
+		};
+		
+			
+		if (isString(opts.referral)) {
+			data.referral = opts.referral;
 		};
 	
 		const headers = generateHeaders(
