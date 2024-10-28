@@ -1989,7 +1989,7 @@ class HollaExKit {
 
 	/**
 	 * Delete exchange user
-	 * @param {string} user_id - The id for the user
+	 * @param {number} user_id - The id for the user
 	 * @return {object} A JSON object with message
 	 */
 	deleteExchangeUser(user_id) {
