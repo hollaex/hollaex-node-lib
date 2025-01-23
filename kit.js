@@ -1994,6 +1994,30 @@ class HollaExKit {
 		}
 	
 	}
+
+	/**
+	 * Delete exchange user
+	 * @param {number} user_id - The id for the user
+	 * @return {object} A JSON object with message
+	 */
+	deleteExchangeUser(user_id) {
+		const verb = 'DELETE';
+		let path = `${this.baseUrl}/admin/user`;
+		const data = {
+			user_id
+		};
+		
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	
 	
 	/**
 	 * Create wallet for exchange user
