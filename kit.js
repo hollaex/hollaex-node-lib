@@ -1732,6 +1732,7 @@ class HollaExKit {
 	/**
 	 * Retrieve list of the user info by admin
 	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.id - The identifier of the user to filter by
 	 * @param {number} opts.userId - The identifier of the user to filter by
 	 * @param {string} opts.search - The search text to filter by, pass undefined to receive data on all fields
 	 * @param {boolean} opts.pending - The pending field to filter by, pass undefined to receive all data
@@ -1747,6 +1748,7 @@ class HollaExKit {
 	 */
 	getExchangeUsers(
 		opts = {
+			id: null,
 			userId: null,
 			search: null,
 			type: null,
@@ -1765,6 +1767,10 @@ class HollaExKit {
 		let path = `${this.baseUrl}/admin/users`;
 		let params = '?';
 		
+		if (isNumber(opts.id)) {
+			params += `&id=${opts.id}`;
+		}
+
 		if (isNumber(opts.userId)) {
 			params += `&id=${opts.userId}`;
 		}
