@@ -693,7 +693,7 @@ class HollaExKit {
 	 * @return {object} A JSON object with conversion info
 	 */
 	getOraclePrice(
-		assets, 
+		assets,
 		opts = {
 			quote: null,
 			amount: null
@@ -710,7 +710,7 @@ class HollaExKit {
 		if (isString(opts.quote)) {
 			params += `&quote=${opts.quote}`;
 		}
-		
+
 		if (isNumber(opts.amount)) {
 			params += `&amount=${opts.amount}`;
 		}
@@ -726,7 +726,7 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
 
-	
+
 	/**
 	 * Get trade history HOLCV for all pairs
 	 * @param {array} assets - The list of assets to get the mini charts for
@@ -750,21 +750,21 @@ class HollaExKit {
 		if (isArray(assets)) {
 			params += `&assets=${opts.assets}`;
 		}
-	
+
 		if (isString(opts.from)) {
 			params += `&from=${opts.from}`;
 		}
-	
+
 		if (isString(opts.to)) {
 			params += `&to=${opts.to}`;
 		}
-	
+
 		if (isString(opts.quote)) {
 			params += `&quote=${opts.quote}`;
 		}
-	
+
 		if (params.length > 1) path += params;
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -774,7 +774,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Get Quick Trade Quote
 	 * @param {string} spending_currency -  Currency symbol of the spending currency
@@ -793,11 +793,11 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/quick-trade`;
 		let params = '?';
-	
+
 		if (isString(spending_currency)) {
 			params += `&spending_currency=${spending_currency}`;
 		}
-	
+
 		if (isString(receiving_currency)) {
 			params += `&receiving_currency=${receiving_currency}`;
 		}
@@ -805,13 +805,13 @@ class HollaExKit {
 		if (isString(opts.spending_amount)) {
 			params += `&spending_amount=${opts.spending_amount}`;
 		}
-	
+
 		if (isString(opts.receiving_amount)) {
 			params += `&receiving_amount=${opts.receiving_amount}`;
 		}
-	
+
 		if (params.length > 1) path += params;
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -834,7 +834,7 @@ class HollaExKit {
 		const data = {
 			token
 		};
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -907,7 +907,7 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/deposits`;
 		let params = '?';
-		
+
 		if (isNumber(opts.userId)) {
 			params += `&user_id=${opts.userId}`;
 		}
@@ -983,7 +983,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Retrieve list of the user's withdrawals by admin
 	 * @param {object} opts - Optional parameters
@@ -1150,7 +1150,7 @@ class HollaExKit {
 			amount
 		};
 
-		
+
 		if (isString(opts.description)) {
 			data.description = opts.description;
 		}
@@ -1200,7 +1200,7 @@ class HollaExKit {
 			amount
 		};
 
-		
+
 		if (isString(opts.transactionId)) {
 			data.transaction_id = opts.transactionId;
 		}
@@ -1264,7 +1264,7 @@ class HollaExKit {
 		if (isString(opts.updatedTransactionId)) {
 			data.updated_transaction_id = opts.updatedTransactionId;
 		}
-		
+
 		if (isString(opts.updatedAddress)) {
 			data.updated_address = opts.updatedAddress;
 		}
@@ -1338,24 +1338,24 @@ class HollaExKit {
 			currency,
 			amount
 		};
-	
-		
+
+
 		if (isString(opts.transactionId)) {
 			data.transaction_id = opts.transactionId;
 		}
-	
+
 		if (isBoolean(opts.status)) {
 			data.status = opts.status;
 		}
-	
+
 		if (isBoolean(opts.email)) {
 			data.email = opts.email;
 		}
-	
+
 		if (isNumber(opts.fee)) {
 			data.fee = opts.fee;
 		}
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1366,7 +1366,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+
 	/**
 	 * Update Exchange Withdrawal
 	 * @param {string} transactionId - Withdrawals with specific transaction ID.
@@ -1399,43 +1399,43 @@ class HollaExKit {
 		const data = {
 			transaction_id: transactionId
 		};
-	
+
 		if (isString(opts.updatedTransactionId)) {
 			data.updated_transaction_id = opts.updatedTransactionId;
 		}
-		
+
 		if (isString(opts.updatedAddress)) {
 			data.updated_address = opts.updatedAddress;
 		}
-	
+
 		if (isBoolean(opts.status)) {
 			data.status = opts.status;
 		}
-	
+
 		if (isBoolean(opts.rejected)) {
 			data.rejected = opts.rejected;
 		}
-	
+
 		if (isBoolean(opts.dismissed)) {
 			data.dismissed = opts.dismissed;
 		}
-	
+
 		if (isBoolean(opts.processing)) {
 			data.processing = opts.processing;
 		}
-	
+
 		if (isBoolean(opts.waiting)) {
 			data.waiting = opts.waiting;
 		}
-	
+
 		if (isBoolean(opts.email)) {
 			data.email = opts.email;
 		}
-	
+
 		if (isString(opts.description)) {
 			data.description = opts.description;
 		}
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1446,7 +1446,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-		
+
 	/**
 	 * Check exchange deposit status
 	 * @param {number} userId - The identifier of the user
@@ -1473,19 +1473,19 @@ class HollaExKit {
 		if (isString(currency)) {
 			params += `&currency=${currency}`;
 		}
-	
+
 		if (isString(transactionId)) {
 			params += `&transaction_id=${transactionId}`;
 		}
-	
+
 		if (isString(address)) {
 			params += `&address=${address}`;
 		}
-	
+
 		if (isString(network)) {
 			params += `&network=${network}`;
 		}
-	
+
 		if (isBoolean(opts.isTestnet)) {
 			params += `&is_testnet=${opts.isTestnet}`;
 		}
@@ -1501,7 +1501,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Set exchange fees by admin
 	 * @param {number} opts.userId - The identifier of the user
@@ -1514,11 +1514,11 @@ class HollaExKit {
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/fees/settle`;
-	
+
 		if (isNumber(opts.userId)) {
 			path += `?user_id=${opts.userId}`;
 		}
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1528,7 +1528,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Retrieve user's trades by admin
 	 * @param {number} opts.userId - The identifier of the user
@@ -1559,45 +1559,45 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/trades`;
 		let params = '?';
-		
+
 		if (isNumber(opts.userId)) {
 			params += `&user_id=${opts.userId}`;
 		}
-	
+
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
-	
+
 		if (isNumber(opts.page)) {
 			params += `&page=${opts.page}`;
 		}
-	
+
 		if (isString(opts.symbol)) {
 			params += `&symbol=${opts.symbol}`;
 		}
-	
+
 		if (isString(opts.orderBy)) {
 			params += `&order_by=${opts.orderBy}`;
 		}
-	
+
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			params += `&order=${opts.order}`;
 		}
-	
+
 		if (isDatetime(opts.startDate)) {
 			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
-	
+
 		if (isDatetime(opts.endDate)) {
 			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
-	
+
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			params += `&format=${opts.format}`;
 		}
 
 		if (params.length > 1) path += params;
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1642,47 +1642,47 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/orders`;
 		let params = '?';
-		
+
 		if (isNumber(opts.userId)) {
 			params += `&user_id=${opts.userId}`;
 		}
-	
+
 		if (isString(opts.side) && (opts.side === 'buy' || opts.side === 'sell')) {
 			params += `&side=${opts.side}`;
 		}
-		
+
 		if (isString(opts.status)) {
 			params += `&status=${opts.status}`;
 		}
-	
+
 		if (isBoolean(opts.open)) {
 			params += `&open=${opts.open}`;
 		}
-	
+
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
-	
+
 		if (isNumber(opts.page)) {
 			params += `&page=${opts.page}`;
 		}
-	
+
 		if (isString(opts.symbol)) {
 			params += `&symbol=${opts.symbol}`;
 		}
-	
+
 		if (isString(opts.orderBy)) {
 			params += `&order_by=${opts.orderBy}`;
 		}
-	
+
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			params += `&order=${opts.order}`;
 		}
-	
+
 		if (isDatetime(opts.startDate)) {
 			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
-	
+
 		if (isDatetime(opts.endDate)) {
 			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
@@ -1698,7 +1698,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Cancel user's order by order id
 	 * @param {number} userId - The identifier of the user
@@ -1709,11 +1709,11 @@ class HollaExKit {
 		const verb = 'DELETE';
 		let path = `${this.baseUrl}/admin/order`;
 		let params = '?';
-	
+
 		if (isString(orderId)) {
 			params += `&order_id=${orderId}`;
 		}
-	
+
 		if (isNumber(userId)) {
 			params += `&user_id=${userId}`;
 		}
@@ -1766,7 +1766,7 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/users`;
 		let params = '?';
-		
+
 		if (isNumber(opts.id)) {
 			params += `&id=${opts.id}`;
 		}
@@ -1774,52 +1774,52 @@ class HollaExKit {
 		if (isNumber(opts.userId)) {
 			params += `&id=${opts.userId}`;
 		}
-	
+
 		if (isString(opts.search)) {
 			params += `&search=${opts.search}`;
 		}
-		
+
 		if (isString(opts.type)) {
 			params += `&type=${opts.type}`;
 		}
-	
+
 		if (isBoolean(opts.pending)) {
 			params += `&pending=${opts.pending}`;
 		}
-	
-		if (isString(opts.pendingType) && (opts.pendingType === 'id' ||opts.pendingType === 'bank')) {
+
+		if (isString(opts.pendingType) && (opts.pendingType === 'id' || opts.pendingType === 'bank')) {
 			params += `&pending_type=${opts.pendingType}`;
 		}
-	
+
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
-	
+
 		if (isNumber(opts.page)) {
 			params += `&page=${opts.page}`;
 		}
-	
+
 		if (isString(opts.orderBy)) {
 			params += `&order_by=${opts.orderBy}`;
 		}
-	
+
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			params += `&order=${opts.order}`;
 		}
-	
+
 		if (isDatetime(opts.startDate)) {
 			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
-	
+
 		if (isDatetime(opts.endDate)) {
 			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
-	
+
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			params += `&format=${opts.format}`;
 		}
 		if (params.length > 1) path += params;
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1829,7 +1829,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Create exchange user
 	 * @param {string} email - The mail address for the user
@@ -1846,12 +1846,12 @@ class HollaExKit {
 			email,
 			password
 		};
-		
-			
+
+
 		if (isString(opts.referral)) {
 			data.referral = opts.referral;
 		};
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1862,7 +1862,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+
 	/**
 	 * Update exchange user
 	 * @param {number} userId - The identifier of the user to filter by
@@ -1883,11 +1883,11 @@ class HollaExKit {
 			note: null,
 			verification_level: null
 		},
-	
+
 	) {
-		if (isString(opts.role) 
+		if (isString(opts.role)
 			&& ['admin', 'supervisor', 'support', 'kyc', 'communicator', 'user'].includes(opts.role)) {
-	
+
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/role`;
 
@@ -1897,7 +1897,7 @@ class HollaExKit {
 			const data = {
 				role: opts.role
 			};
-	
+
 			const headers = generateHeaders(
 				this.headers,
 				this.apiSecret,
@@ -1908,20 +1908,20 @@ class HollaExKit {
 			);
 			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 		}
-	
-		if(isObject(opts.meta)){
+
+		if (isObject(opts.meta)) {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/meta`;
-	
+
 			if (isNumber(userId)) {
 				path += `?user_id=${userId}`;
 			}
-	
+
 			const data = {
 				meta: opts.meta,
 				...(isBoolean(opts.overwrite) && { overwrite: opts.overwrite }),
 			};
-	
+
 			const headers = generateHeaders(
 				this.headers,
 				this.apiSecret,
@@ -1932,19 +1932,19 @@ class HollaExKit {
 			);
 			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 		}
-	
-		if(isNumber(opts.discount) && opts.discount <= 100 && opts.discount >= 0){
+
+		if (isNumber(opts.discount) && opts.discount <= 100 && opts.discount >= 0) {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/discount`;
-	
+
 			if (isNumber(userId)) {
 				path += `?user_id=${userId}`;
 			}
-	
+
 			const data = {
 				discount: opts.discount
 			};
-	
+
 			const headers = generateHeaders(
 				this.headers,
 				this.apiSecret,
@@ -1955,19 +1955,19 @@ class HollaExKit {
 			);
 			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 		}
-	
-		if(isString(opts.note)){
+
+		if (isString(opts.note)) {
 			const verb = 'PUT';
 			let path = `${this.baseUrl}/admin/user/note`;
-	
+
 			if (isNumber(userId)) {
 				path += `?user_id=${userId}`;
 			}
-	
+
 			const data = {
 				note: opts.note
 			};
-	
+
 			const headers = generateHeaders(
 				this.headers,
 				this.apiSecret,
@@ -1978,16 +1978,16 @@ class HollaExKit {
 			);
 			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 		}
-	
-		if(isNumber(opts.verification_level)){
+
+		if (isNumber(opts.verification_level)) {
 			const verb = 'POST';
 			let path = `${this.baseUrl}/admin/upgrade-user`;
-	
+
 			const data = {
 				user_id: userId,
 				verification_level: opts.verification_level
 			};
-	
+
 			const headers = generateHeaders(
 				this.headers,
 				this.apiSecret,
@@ -1998,7 +1998,7 @@ class HollaExKit {
 			);
 			return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 		}
-	
+
 	}
 
 	/**
@@ -2012,7 +2012,7 @@ class HollaExKit {
 		const data = {
 			user_id
 		};
-		
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2023,8 +2023,8 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
-	
+
+
 	/**
 	 * Create wallet for exchange user
 	 * @param {number} userId - The identifier of the user
@@ -2035,7 +2035,7 @@ class HollaExKit {
 	createExchangeUserWallet(
 		userId,
 		crypto,
-		opts= {
+		opts = {
 			network: null
 		}
 	) {
@@ -2045,11 +2045,11 @@ class HollaExKit {
 			user_id: userId,
 			crypto
 		};
-	
+
 		if (isString(opts.network)) {
 			data.network = opts.network;
 		}
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2102,11 +2102,11 @@ class HollaExKit {
 		if (isNumber(opts.userId)) {
 			params += `&user_id=${opts.userId}`;
 		}
-	
+
 		if (isString(opts.currency)) {
 			params += `&currency=${opts.currency}`;
 		}
-		
+
 		if (isString(opts.address)) {
 			params += `&address=${opts.address}`;
 		}
@@ -2118,23 +2118,23 @@ class HollaExKit {
 		if (isBoolean(opts.isValid)) {
 			params += `&is_valid=${opts.isValid}`;
 		}
-	
+
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
-	
+
 		if (isNumber(opts.page)) {
 			params += `&page=${opts.page}`;
 		}
-	
+
 		if (isString(opts.orderBy)) {
 			params += `&order_by=${opts.orderBy}`;
 		}
-	
+
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			params += `&order=${opts.order}`;
 		}
-	
+
 		if (isDatetime(opts.startDate)) {
 			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
@@ -2142,13 +2142,13 @@ class HollaExKit {
 		if (isDatetime(opts.endDate)) {
 			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
-	
+
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			params += `&format=${opts.format}`;
 		}
 
 		if (params.length > 1) path += params;
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2158,7 +2158,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Retrieve user's login info by admin
 	 * @param {number} userId - The identifier of the user
@@ -2167,7 +2167,7 @@ class HollaExKit {
 	getExchangeUserBalance(userId) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/user/balance?user_id=${userId}`;
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2177,7 +2177,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Create bank account for user by admin
 	 * @param {number} userId - The identifier of the user
@@ -2187,15 +2187,15 @@ class HollaExKit {
 	createExchangeUserBank(userId, bankAccount) {
 		const verb = 'POST';
 		let path = `${this.baseUrl}/admin/user/bank`;
-		
+
 		if (isNumber(userId)) {
 			path += `?id=${userId}`;
 		}
-	
+
 		const data = {
 			bank_account: bankAccount
 		};
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2205,9 +2205,9 @@ class HollaExKit {
 			data
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
-		
+
 	}
-	
+
 	/**
 	 * Retrieve user's login info by admin
 	 * @param {number} opts.userId - The identifier of the user
@@ -2234,39 +2234,39 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/logins`;
 		let params = '?';
-		
+
 		if (isNumber(opts.userId)) {
 			params += `&user_id=${opts.userId}`;
 		}
-	
+
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
-	
+
 		if (isNumber(opts.page)) {
 			params += `&page=${opts.page}`;
 		}
-	
+
 		if (isString(opts.orderBy)) {
 			params += `&order_by=${opts.orderBy}`;
 		}
-	
+
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			params += `&order=${opts.order}`;
 		}
-	
+
 		if (isDatetime(opts.startDate)) {
 			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
-	
+
 		if (isDatetime(opts.endDate)) {
 			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
-	
+
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			params += `&format=${opts.format}`;
 		}
-	
+
 		if (params.length > 1) path += params;
 
 		const headers = generateHeaders(
@@ -2278,7 +2278,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
-	
+
 	/**
 	 * Deactivate exchange user account by admin
 	 * @param {number} userId - The identifier of the user to deactivate their exchange account
@@ -2291,7 +2291,7 @@ class HollaExKit {
 			user_id: userId,
 			activated: false
 		};
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2302,7 +2302,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+
 	/**
 	 * Deactivate user otp by admin
 	 * @param {number} userId - The identifier of the user to deactivate their otp
@@ -2314,7 +2314,7 @@ class HollaExKit {
 		const data = {
 			user_id: userId
 		};
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2325,7 +2325,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+
 	/**
 	 * Retrieve user's referrals info by admin
 	 * @param {number} userId - The identifier of the user to filter by
@@ -2351,38 +2351,38 @@ class HollaExKit {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/user/affiliation`;
 		let params = '?';
-		
+
 		if (isNumber(userId)) {
 			params += `&user_id=${userId}`;
 		}
-	
+
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
-	
+
 		if (isNumber(opts.page)) {
 			params += `&page=${opts.page}`;
 		}
-	
+
 		if (isString(opts.orderBy)) {
 			params += `&order_by=${opts.orderBy}`;
 		}
-	
+
 		if (isString(opts.order) && (opts.order === 'asc' || opts.order === 'desc')) {
 			params += `&order=${opts.order}`;
 		}
-	
+
 		if (isDatetime(opts.startDate)) {
 			params += `&start_date=${sanitizeDate(opts.startDate)}`;
 		}
-	
+
 		if (isDatetime(opts.endDate)) {
 			params += `&end_date=${sanitizeDate(opts.endDate)}`;
 		}
 
 		if (params.length > 1) path += params;
-	
-	
+
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2426,7 +2426,7 @@ class HollaExKit {
 			mail_type: mailType,
 			data: content
 		};
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2457,14 +2457,14 @@ class HollaExKit {
 			html,
 		};
 
-		if(isString(opts.title)) {
+		if (isString(opts.title)) {
 			data.title = opts.title;
 		}
-		
-		if(isString(opts.text)) {
+
+		if (isString(opts.text)) {
 			data.text = opts.text;
 		}
-	
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2475,7 +2475,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+
 	/**
 	 * Retrieve user's balances by admin
 	 * @param {number} opts.userId - The identifier of the user to filter by
@@ -2492,20 +2492,20 @@ class HollaExKit {
 	) {
 		const verb = 'GET';
 		let path = `${this.baseUrl}/admin/balances?`;
-		
-			
+
+
 		if (isNumber(opts.userId)) {
 			path += `&user_id=${opts.userId}`;
 		}
-			
+
 		if (isString(opts.currency)) {
 			path += `&currency=${opts.currency}`;
 		}
-			
+
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
 			path += `&format=${opts.format}`;
 		}
-		
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2544,7 +2544,7 @@ class HollaExKit {
 			price,
 			symbol
 		};
-		
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2555,7 +2555,7 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
-	
+
 	/**
 	 * Create trade on behalf of users
 	 * @param {number} maker_id - User id for the maker
@@ -2590,7 +2590,7 @@ class HollaExKit {
 			price,
 			side,
 		};
-		
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -2627,8 +2627,8 @@ class HollaExKit {
 			amount,
 			currency
 		};
-		
-		if(isString(opts.network)) {
+
+		if (isString(opts.network)) {
 			data.network = opts.network;
 		}
 
@@ -2643,6 +2643,431 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 
+
+	/**
+	 * Get exchange stakes for admin
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.limit - Number of elements to return. Default: 50. Maximum: 100
+	 * @param {number} opts.page - Page of data to retrieve
+	 * @param {string} opts.order_by - Field to order data
+	 * @param {string} opts.order - Direction to order (asc/desc)
+	 * @param {string} opts.start_date - Starting date of queried data in ISO8601 format
+	 * @param {string} opts.end_date - Ending date of queried data in ISO8601 format
+	 * @param {string} opts.format - Specify data format (csv/all)
+	 * @return {object} A JSON object with stakes data
+	 */
+	getExchangeStakesByAdmin(
+		opts = {
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/stakes`;
+		let params = '?';
+
+		if (isNumber(opts.limit)) {
+			params += `&limit=${opts.limit}`;
+		}
+
+		if (isNumber(opts.page)) {
+			params += `&page=${opts.page}`;
+		}
+
+		if (isString(opts.order_by)) {
+			params += `&order_by=${opts.order_by}`;
+		}
+
+		if (isString(opts.order)) {
+			params += `&order=${opts.order}`;
+		}
+
+		if (isDatetime(opts.start_date)) {
+			params += `&start_date=${sanitizeDate(opts.start_date)}`;
+		}
+
+		if (isDatetime(opts.end_date)) {
+			params += `&end_date=${sanitizeDate(opts.end_date)}`;
+		}
+
+		if (isString(opts.format)) {
+			params += `&format=${opts.format}`;
+		}
+
+		if (params.length > 1) path += params;
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	/**
+	 * Create exchange stakes for admin
+	 * @param {string} name - Name of the stake pool 
+	 * @param {number} user_id - User ID associated with the stake pool
+	 * @param {string} currency - Currency of the stake pool
+	 * @param {number} account_id - Account ID
+	 * @param {number} apy - Annual Percentage Yield
+	 * @param {number} min_amount - Minimum stake amount
+	 * @param {number} max_amount - Maximum stake amount
+	 * @param {boolean} early_unstake - Whether early unstake is allowed
+	 * @param {string} status - Pool status (uninitialized/active/paused/terminated)
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.id - ID for existing stake pool (update only)
+	 * @param {string} opts.reward_currency - Currency for rewards
+	 * @param {number} opts.duration - Duration in days
+	 * @param {boolean} opts.slashing - Whether slashing is enabled
+	 * @param {number} opts.slashing_earning_percentage - Slashing percentage for earnings
+	 * @param {number} opts.slashing_principle_percentage - Slashing percentage for principle
+	 * @param {boolean} opts.onboarding - Whether pool is for onboarding
+	 * @param {string} opts.disclaimer - Disclaimer text
+	 * @return {object} A JSON object with the created stake
+	 */
+	createExchangeStakesByAdmin(
+		name,
+		user_id,
+		currency,
+		account_id,
+		apy,
+		min_amount,
+		max_amount,
+		early_unstake,
+		status,
+		opts = {
+			reward_currency: null,
+			duration: null,
+			slashing: null,
+			slashing_earning_percentage: null,
+			slashing_principle_percentage: null,
+			onboarding: null,
+			disclaimer: null
+		}
+	) {
+		const verb = 'POST';
+		const path = `${this.baseUrl}/admin/stake`;
+		const data = {
+			name,
+			user_id,
+			currency,
+			account_id,
+			apy,
+			min_amount,
+			max_amount,
+			early_unstake,
+			status
+		};
+
+		if (isString(opts.reward_currency)) {
+			data.reward_currency = opts.reward_currency;
+		}
+
+		if (isNumber(opts.duration)) {
+			data.duration = opts.duration;
+		}
+
+		if (isBoolean(opts.slashing)) {
+			data.slashing = opts.slashing;
+		}
+
+		if (isNumber(opts.slashing_earning_percentage)) {
+			data.slashing_earning_percentage = opts.slashing_earning_percentage;
+		}
+
+		if (isNumber(opts.slashing_principle_percentage)) {
+			data.slashing_principle_percentage = opts.slashing_principle_percentage;
+		}
+
+		if (isBoolean(opts.onboarding)) {
+			data.onboarding = opts.onboarding;
+		}
+
+		if (isString(opts.disclaimer)) {
+			data.disclaimer = opts.disclaimer;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	/**
+	 * Update exchange stakes for admin
+	 * @param {number} id - ID of the stake pool to update
+	 * @param {object} opts - Optional parameters
+	 * @param {string} opts.name - Name of the stake pool 
+	 * @param {number} opts.user_id - User ID associated with the stake pool
+	 * @param {string} opts.currency - Currency of the stake pool
+	 * @param {string} opts.reward_currency - Currency for rewards
+	 * @param {number} opts.account_id - Account ID
+	 * @param {number} opts.apy - Annual Percentage Yield
+	 * @param {number} opts.duration - Duration in days
+	 * @param {boolean} opts.slashing - Whether slashing is enabled
+	 * @param {number} opts.slashing_earning_percentage - Slashing percentage for earnings
+	 * @param {number} opts.slashing_principle_percentage - Slashing percentage for principle
+	 * @param {boolean} opts.early_unstake - Whether early unstake is allowed
+	 * @param {number} opts.min_amount - Minimum stake amount
+	 * @param {number} opts.max_amount - Maximum stake amount
+	 * @param {string} opts.status - Pool status (uninitialized/active/paused/terminated)
+	 * @param {boolean} opts.onboarding - Whether pool is for onboarding
+	 * @param {string} opts.disclaimer - Disclaimer text
+	 * @return {object} A JSON object with the updated stake
+	 */
+	updateExchangeStakesByAdmin(
+		id,
+		opts = {
+			name: null,
+			user_id: null,
+			currency: null,
+			reward_currency: null,
+			account_id: null,
+			apy: null,
+			duration: null,
+			slashing: null,
+			slashing_earning_percentage: null,
+			slashing_principle_percentage: null,
+			early_unstake: null,
+			min_amount: null,
+			max_amount: null,
+			status: null,
+			onboarding: null,
+			disclaimer: null
+		}
+	) {
+		const verb = 'PUT';
+		const path = `${this.baseUrl}/admin/stake`;
+		const data = { id };
+
+		// Optional parameters
+		if (isString(opts.name)) {
+			data.name = opts.name;
+		}
+
+		if (isNumber(opts.user_id)) {
+			data.user_id = opts.user_id;
+		}
+
+		if (isString(opts.currency)) {
+			data.currency = opts.currency;
+		}
+
+		if (isString(opts.reward_currency)) {
+			data.reward_currency = opts.reward_currency;
+		}
+
+		if (isNumber(opts.account_id)) {
+			data.account_id = opts.account_id;
+		}
+
+		if (isNumber(opts.apy)) {
+			data.apy = opts.apy;
+		}
+
+		if (isNumber(opts.duration)) {
+			data.duration = opts.duration;
+		}
+
+		if (isBoolean(opts.slashing)) {
+			data.slashing = opts.slashing;
+		}
+
+		if (isNumber(opts.slashing_earning_percentage)) {
+			data.slashing_earning_percentage = opts.slashing_earning_percentage;
+		}
+
+		if (isNumber(opts.slashing_principle_percentage)) {
+			data.slashing_principle_percentage = opts.slashing_principle_percentage;
+		}
+
+		if (isBoolean(opts.early_unstake)) {
+			data.early_unstake = opts.early_unstake;
+		}
+
+		if (isNumber(opts.min_amount)) {
+			data.min_amount = opts.min_amount;
+		}
+
+		if (isNumber(opts.max_amount)) {
+			data.max_amount = opts.max_amount;
+		}
+
+		if (isString(opts.status) && ['uninitialized', 'active', 'paused', 'terminated'].includes(opts.status)) {
+			data.status = opts.status;
+		}
+
+		if (isBoolean(opts.onboarding)) {
+			data.onboarding = opts.onboarding;
+		}
+
+		if (isString(opts.disclaimer)) {
+			data.disclaimer = opts.disclaimer;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	/**
+	 * Delete exchange stakes for admin
+	 * @param {object} data - ID object containing stake ID to delete
+	 * @return {object} A JSON object with deletion result
+	 */
+	deleteExchangeStakesByAdmin(id) {
+		const verb = 'DELETE';
+		const path = `${this.baseUrl}/admin/stake`;
+		const data = { id };
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	/**
+	 * Get exchange stakers of users for admin
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.id - Unique identifier for the staker entry
+	 * @param {number} opts.user_id - The ID of the user who has locked funds and staked
+	 * @param {number} opts.stake_id - The ID of the stake pool
+	 * @param {string} opts.currency - The currency in which the user staked
+	 * @param {number} opts.reward - The amount the user has received as rewards
+	 * @param {number} opts.slashed - The amount slashed
+	 * @param {number} opts.limit - Number of elements to return. Default: 50. Maximum: 100
+	 * @param {number} opts.page - Page of data to retrieve
+	 * @param {string} opts.order_by - Field to order data
+	 * @param {string} opts.order - Direction to order (asc/desc)
+	 * @param {string} opts.start_date - Starting date of queried data in ISO8601 format
+	 * @param {string} opts.end_date - Ending date of queried data in ISO8601 format
+	 * @param {string} opts.format - Specify data format (csv/all)
+	 * @return {object} A JSON object with stakers data
+	 */
+	getExchangeStakersByAdmin(
+		opts = {
+			id: null,
+			user_id: null,
+			stake_id: null,
+			currency: null,
+			reward: null,
+			slashed: null,
+			limit: null,
+			page: null,
+			order_by: null,
+			order: null,
+			start_date: null,
+			end_date: null,
+			format: null
+		}
+	) {
+		const verb = 'GET';
+		let path = `${this.baseUrl}/admin/stakers`;
+		let params = '?';
+
+		if (isNumber(opts.id)) {
+			params += `&id=${opts.id}`;
+		}
+
+		if (isNumber(opts.user_id)) {
+			params += `&user_id=${opts.user_id}`;
+		}
+
+		if (isNumber(opts.stake_id)) {
+			params += `&stake_id=${opts.stake_id}`;
+		}
+
+		if (isString(opts.currency)) {
+			params += `&currency=${opts.currency}`;
+		}
+
+		if (isNumber(opts.reward)) {
+			params += `&reward=${opts.reward}`;
+		}
+
+		if (isNumber(opts.slashed)) {
+			params += `&slashed=${opts.slashed}`;
+		}
+
+		if (isNumber(opts.limit)) {
+			params += `&limit=${opts.limit}`;
+		}
+
+		if (isNumber(opts.page)) {
+			params += `&page=${opts.page}`;
+		}
+
+		if (isString(opts.order_by)) {
+			params += `&order_by=${opts.order_by}`;
+		}
+
+		if (isString(opts.order)) {
+			params += `&order=${opts.order}`;
+		}
+
+		if (isDatetime(opts.start_date)) {
+			params += `&start_date=${sanitizeDate(opts.start_date)}`;
+		}
+
+		if (isDatetime(opts.end_date)) {
+			params += `&end_date=${sanitizeDate(opts.end_date)}`;
+		}
+
+		if (isString(opts.format)) {
+			params += `&format=${opts.format}`;
+		}
+
+		if (params.length > 1) path += params;
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	/**
+	 * Get staking and unstaking amounts
+	 * @return {object} A JSON object with stake analytics data
+	 */
+	getStakeAnalyticsByAdmin() {
+		const verb = 'GET';
+		const path = `${this.baseUrl}/admin/stake/analytics`;
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
 	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
@@ -2660,9 +3085,8 @@ class HollaExKit {
 				'/stream',
 				apiExpires
 			);
-			url = `${url}?api-key=${
-				this.apiKey
-			}&api-signature=${signature}&api-expires=${apiExpires}`;
+			url = `${url}?api-key=${this.apiKey
+				}&api-signature=${signature}&api-expires=${apiExpires}`;
 		}
 
 		this.ws = new WebSocket(url);
@@ -2754,21 +3178,41 @@ class HollaExKit {
 				if (!this.wsEvents.includes(event) || this.initialConnection) {
 					const [topic, symbol] = event.split(':');
 					switch (topic) {
-					case 'orderbook':
-					case 'trade':
-						if (symbol) {
-							if (!this.wsEvents.includes(topic)) {
+						case 'orderbook':
+						case 'trade':
+							if (symbol) {
+								if (!this.wsEvents.includes(topic)) {
+									this.ws.send(
+										JSON.stringify({
+											op: 'subscribe',
+											args: [`${topic}:${symbol}`]
+										})
+									);
+									if (!this.initialConnection) {
+										this.wsEvents = union(this.wsEvents, [event]);
+									}
+								}
+							} else {
 								this.ws.send(
 									JSON.stringify({
 										op: 'subscribe',
-										args: [`${topic}:${symbol}`]
+										args: [topic]
 									})
 								);
 								if (!this.initialConnection) {
+									this.wsEvents = this.wsEvents.filter(
+										(e) => !e.includes(`${topic}:`)
+									);
 									this.wsEvents = union(this.wsEvents, [event]);
 								}
 							}
-						} else {
+							break;
+						case 'order':
+						case 'usertrade':
+						case 'wallet':
+						case 'deposit':
+						case 'withdrawal':
+						case 'admin':
 							this.ws.send(
 								JSON.stringify({
 									op: 'subscribe',
@@ -2776,31 +3220,11 @@ class HollaExKit {
 								})
 							);
 							if (!this.initialConnection) {
-								this.wsEvents = this.wsEvents.filter(
-									(e) => !e.includes(`${topic}:`)
-								);
 								this.wsEvents = union(this.wsEvents, [event]);
 							}
-						}
-						break;
-					case 'order':
-					case 'usertrade':
-					case 'wallet':
-					case 'deposit':
-					case 'withdrawal':
-					case 'admin':
-						this.ws.send(
-							JSON.stringify({
-								op: 'subscribe',
-								args: [topic]
-							})
-						);
-						if (!this.initialConnection) {
-							this.wsEvents = union(this.wsEvents, [event]);
-						}
-						break;
-					default:
-						break;
+							break;
+						default:
+							break;
 					}
 				}
 			});
@@ -2819,40 +3243,40 @@ class HollaExKit {
 				if (this.wsEvents.includes(event)) {
 					const [topic, symbol] = event.split(':');
 					switch (topic) {
-					case 'orderbook':
-					case 'trade':
-						if (symbol) {
-							this.ws.send(
-								JSON.stringify({
-									op: 'unsubscribe',
-									args: [`${topic}:${symbol}`]
-								})
-							);
-						} else {
+						case 'orderbook':
+						case 'trade':
+							if (symbol) {
+								this.ws.send(
+									JSON.stringify({
+										op: 'unsubscribe',
+										args: [`${topic}:${symbol}`]
+									})
+								);
+							} else {
+								this.ws.send(
+									JSON.stringify({
+										op: 'unsubscribe',
+										args: [topic]
+									})
+								);
+							}
+							this.wsEvents = this.wsEvents.filter((e) => e !== event);
+							break;
+						case 'order':
+						case 'wallet':
+						case 'deposit':
+						case 'withdrawal':
+						case 'admin':
 							this.ws.send(
 								JSON.stringify({
 									op: 'unsubscribe',
 									args: [topic]
 								})
 							);
-						}
-						this.wsEvents = this.wsEvents.filter((e) => e !== event);
-						break;
-					case 'order':
-					case 'wallet':
-					case 'deposit':
-					case 'withdrawal':
-					case 'admin':
-						this.ws.send(
-							JSON.stringify({
-								op: 'unsubscribe',
-								args: [topic]
-							})
-						);
-						this.wsEvents = this.wsEvents.filter((e) => e !== event);
-						break;
-					default:
-						break;
+							this.wsEvents = this.wsEvents.filter((e) => e !== event);
+							break;
+						default:
+							break;
 					}
 				}
 			});
