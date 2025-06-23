@@ -1739,7 +1739,7 @@ class HollaExKit {
 	 * @param {string} opts.pendingType - Th pending type info to filter by, pass undefined to receive data
 	 * @param {string} opts.bank_key - bank query key to fetch specific bank
 	 * @param {string} opts.bank_value -  bank query value to fetch specific bank
-	 * @param {string} opts.activated -  bank activated query
+	 * @param {boolean} opts.activated -  bank activated query
 	 * @param {number} opts.limit - Amount of users per page. Maximum: 50. Default: 50
 	 * @param {number} opts.page - Page of user data. Default: 1
 	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
