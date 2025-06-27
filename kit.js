@@ -1737,6 +1737,9 @@ class HollaExKit {
 	 * @param {string} opts.search - The search text to filter by, pass undefined to receive data on all fields
 	 * @param {boolean} opts.pending - The pending field to filter by, pass undefined to receive all data
 	 * @param {string} opts.pendingType - Th pending type info to filter by, pass undefined to receive data
+	 * @param {string} opts.bank_key - bank query key to fetch specific bank
+	 * @param {string} opts.bank_value -  bank query value to fetch specific bank
+	 * @param {boolean} opts.activated -  bank activated query
 	 * @param {number} opts.limit - Amount of users per page. Maximum: 50. Default: 50
 	 * @param {number} opts.page - Page of user data. Default: 1
 	 * @param {string} opts.orderBy - The field to order data by e.g. amount, id.
@@ -1758,6 +1761,9 @@ class HollaExKit {
 			page: null,
 			orderBy: null,
 			order: null,
+			bank_key: null,
+			bank_value: null,
+			activated: null,
 			startDate: null,
 			endDate: null,
 			format: null
@@ -1791,6 +1797,12 @@ class HollaExKit {
 			params += `&pending_type=${opts.pendingType}`;
 		}
 
+		if (isString(opts.bank_key) && isString(opts.bank_value)) {
+			params += `&${opts.bank_key}=${opts.bank_value}`;
+		}
+		if (isBoolean(opts.activated)) {
+			params += `&activated=${opts.activated}`;
+		}
 		if (isNumber(opts.limit)) {
 			params += `&limit=${opts.limit}`;
 		}
