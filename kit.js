@@ -1798,7 +1798,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.bank_key) && isString(opts.bank_value)) {
-			params += `&${opts.bank_key}=${opts.bank_value}`;
+			params += `&bank_key=${opts.bank_key}&bank_value=${opts.bank_value}`;
 		}
 		if (isBoolean(opts.activated)) {
 			params += `&activated=${opts.activated}`;
