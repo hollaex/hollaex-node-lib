@@ -3080,6 +3080,37 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
+
+	/**
+ 	* Block a user’s withdrawal ability
+ 	* @param {number} user_id – The ID of the user to disable withdrawals for
+ 	* @param {string|null} expiry_date – ISO date‑time string when the block expires
+ 	* @return {object} A JSON object { message: "Success" }
+ 	*/
+	disableUserWithdrawalByAdmin(user_id, opts = { expiry_date : null }
+		) {
+		const verb = 'POST';
+		const path = `${this.baseUrl}/admin/user/disable-withdrawal`;
+		const data = {
+			user_id
+		};
+
+		if (opts.expiry_date !== null && isDatetime(opts.expiry_date)) {
+			data.expiry_date = sanitizeDate(opts.expiry_date);
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
 	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
