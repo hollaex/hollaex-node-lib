@@ -127,6 +127,7 @@ client
 | `deleteExchangeStakesByAdmin` | <ul><li>**id**: ID of the stake pool to delete</li></ul> | Delete exchange stakes for admin |
 | `getExchangeStakersByAdmin` | <ul><li>**opts.id**: Unique identifier for the staker entry</li><li>**opts.user_id**: The ID of the user who has locked funds and staked</li><li>**opts.stake_id**: The ID of the stake pool</li><li>**opts.currency**: The currency in which the user staked</li><li>**opts.reward**: The amount the user has received as rewards</li><li>**opts.slashed**: The amount slashed</li><li>**opts.limit**: Number of elements to return. Default: 50. Maximum: 100</li><li>**opts.page**: Page of data to retrieve</li><li>**opts.order_by**: Field to order data</li><li>**opts.order**: Direction to order (asc/desc)</li><li>**opts.start_date**: Starting date of queried data in ISO8601 format</li><li>**opts.end_date**: Ending date of queried data in ISO8601 format</li><li>**opts.format**: Specify data format (csv/all)</li></ul> | Get exchange stakers of users for admin |
 | `getStakeAnalyticsByAdmin` | <ul><li>No parameters needed</li></ul> | Get staking and unstaking amounts |
+| `disableUserWithdrawalByAdmin` | <ul><li>**user_id**: The ID of the user to disable withdrawals for</li><li>**opts.expiry_date**: ISO date‑time string when the block expires</li></ul> | Block a user’s withdrawal ability |
 
 ### Websocket
 

@@ -3083,20 +3083,20 @@ class HollaExKit {
 
 	/**
  	* Block a user’s withdrawal ability
- 	* @param {number} userId – The ID of the user to disable withdrawals for
- 	* @param {string|null} expiryDate – ISO date‑time string when the block expires
+ 	* @param {number} user_id – The ID of the user to disable withdrawals for
+ 	* @param {string|null} expiry_date – ISO date‑time string when the block expires
  	* @return {object} A JSON object { message: "Success" }
  	*/
-	disableUserWithdrawalByAdmin(userId, opts = { expiryDate : null }
+	disableUserWithdrawalByAdmin(user_id, opts = { expiry_date : null }
 		) {
 		const verb = 'POST';
 		const path = `${this.baseUrl}/admin/user/disable-withdrawal`;
 		const data = {
-			user_id: userId
+			user_id
 		};
 
-		if (opts.expiryDate !== null && isDatetime(opts.expiryDate)) {
-			data.expiry_date = sanitizeDate(opts.expiryDate);
+		if (opts.expiry_date !== null && isDatetime(opts.expiry_date)) {
+			data.expiry_date = sanitizeDate(opts.expiry_date);
 		}
 
 		const headers = generateHeaders(
