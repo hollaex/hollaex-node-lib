@@ -969,6 +969,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -1090,6 +1091,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -1181,7 +1183,7 @@ class HollaExKit {
 	 * @param {number} opts.fee - The fee to specify
 	 * @return {object} A JSON object with deposit info
 	 */
-	createExchangeDeposit(
+	mint(
 		userId,
 		currency,
 		amount,
@@ -1189,7 +1191,9 @@ class HollaExKit {
 			transactionId: null,
 			status: null,
 			email: null,
-			fee: null
+			fee: null,
+			address: null,
+			description: null
 		}
 	) {
 		const verb = 'POST';
@@ -1217,6 +1221,14 @@ class HollaExKit {
 			data.fee = opts.fee;
 		}
 
+		if (isString(opts.address)) {
+			data.address = opts.address;
+		}
+
+		if (isString(opts.description)) {
+			data.description = opts.description;
+		}
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1226,6 +1238,10 @@ class HollaExKit {
 			data
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+	// to support backward compatibility
+	createExchangeDeposit(...args) {
+		return this.mint(...args);
 	}
 
 	/**
@@ -1241,7 +1257,7 @@ class HollaExKit {
 	 * @param {boolean} opts.email - Email
 	 * @return {object} A JSON object with deposit info
 	 */
-	updateExchangeDeposit(
+	updateMint(
 		transactionId,
 		opts = {
 			updatedTransactionId: null,
@@ -1308,6 +1324,10 @@ class HollaExKit {
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 
 	}
+	// to support backward compatibility
+	updateExchangeDeposit(...args) {
+		return this.updateMint(...args);
+	}
 
 	/**
 	 * Create exchange withdrawal by admin
@@ -1320,7 +1340,7 @@ class HollaExKit {
 	 * @param {number} opts.fee - The fee to specify
 	 * @return {object} A JSON object with withdrawal info
 	 */
-	createExchangeWithdrawal(
+	burn(
 		userId,
 		currency,
 		amount,
@@ -1328,7 +1348,9 @@ class HollaExKit {
 			transactionId: null,
 			status: null,
 			email: null,
-			fee: null
+			fee: null,
+			address: null,
+			description: null
 		}
 	) {
 		const verb = 'POST';
@@ -1356,6 +1378,14 @@ class HollaExKit {
 			data.fee = opts.fee;
 		}
 
+		if (isString(opts.address)) {
+			data.address = opts.address;
+		}
+
+		if (isString(opts.description)) {
+			data.description = opts.description;
+		}
+
 		const headers = generateHeaders(
 			this.headers,
 			this.apiSecret,
@@ -1365,6 +1395,11 @@ class HollaExKit {
 			data
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	// to support backward compatibility
+	createExchangeWithdrawal(...args) {
+		return this.burn(...args);
 	}
 
 	/**
@@ -1380,7 +1415,7 @@ class HollaExKit {
 	 * @param {boolean} opts.email - Email
 	 * @return {object} A JSON object with withdrawal info
 	 */
-	updateExchangeWithdrawal(
+	updateBurn(
 		transactionId,
 		opts = {
 			updatedTransactionId: null,
@@ -1445,6 +1480,11 @@ class HollaExKit {
 			data
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
+	// to support backward compatibility
+	updateExchangeWithdrawal(...args) {
+		return this.updateBurn(...args);
 	}
 
 	/**
@@ -1593,6 +1633,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -1828,6 +1869,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 		if (params.length > 1) path += params;
@@ -1862,7 +1904,7 @@ class HollaExKit {
 
 		if (isString(opts.referral)) {
 			data.referral = opts.referral;
-		};
+		}
 
 		const headers = generateHeaders(
 			this.headers,
@@ -2156,6 +2198,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -2276,6 +2319,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -2515,6 +2559,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			path += `&format=${opts.format}`;
 		}
 
@@ -2708,6 +2753,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -3049,6 +3095,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -3080,6 +3127,37 @@ class HollaExKit {
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
 	}
+
+	/**
+ 	* Block a user’s withdrawal ability
+ 	* @param {number} user_id – The ID of the user to disable withdrawals for
+ 	* @param {string|null} expiry_date – ISO date‑time string when the block expires
+ 	* @return {object} A JSON object { message: "Success" }
+ 	*/
+	disableUserWithdrawalByAdmin(user_id, opts = { expiry_date : null }
+	) {
+		const verb = 'POST';
+		const path = `${this.baseUrl}/admin/user/disable-withdrawal`;
+		const data = {
+			user_id
+		};
+
+		if (opts.expiry_date !== null && isDatetime(opts.expiry_date)) {
+			data.expiry_date = sanitizeDate(opts.expiry_date);
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
+	}
+
 	/**
 	 * Connect to hollaEx websocket and listen to an event
 	 * @param {array} events - The events to listen to
@@ -3098,7 +3176,7 @@ class HollaExKit {
 				apiExpires
 			);
 			url = `${url}?api-key=${this.apiKey
-				}&api-signature=${signature}&api-expires=${apiExpires}`;
+			}&api-signature=${signature}&api-expires=${apiExpires}`;
 		}
 
 		this.ws = new WebSocket(url);
@@ -3190,41 +3268,21 @@ class HollaExKit {
 				if (!this.wsEvents.includes(event) || this.initialConnection) {
 					const [topic, symbol] = event.split(':');
 					switch (topic) {
-						case 'orderbook':
-						case 'trade':
-							if (symbol) {
-								if (!this.wsEvents.includes(topic)) {
-									this.ws.send(
-										JSON.stringify({
-											op: 'subscribe',
-											args: [`${topic}:${symbol}`]
-										})
-									);
-									if (!this.initialConnection) {
-										this.wsEvents = union(this.wsEvents, [event]);
-									}
-								}
-							} else {
+					case 'orderbook':
+					case 'trade':
+						if (symbol) {
+							if (!this.wsEvents.includes(topic)) {
 								this.ws.send(
 									JSON.stringify({
 										op: 'subscribe',
-										args: [topic]
+										args: [`${topic}:${symbol}`]
 									})
 								);
 								if (!this.initialConnection) {
-									this.wsEvents = this.wsEvents.filter(
-										(e) => !e.includes(`${topic}:`)
-									);
 									this.wsEvents = union(this.wsEvents, [event]);
 								}
 							}
-							break;
-						case 'order':
-						case 'usertrade':
-						case 'wallet':
-						case 'deposit':
-						case 'withdrawal':
-						case 'admin':
+						} else {
 							this.ws.send(
 								JSON.stringify({
 									op: 'subscribe',
@@ -3232,11 +3290,31 @@ class HollaExKit {
 								})
 							);
 							if (!this.initialConnection) {
+								this.wsEvents = this.wsEvents.filter(
+									(e) => !e.includes(`${topic}:`)
+								);
 								this.wsEvents = union(this.wsEvents, [event]);
 							}
-							break;
-						default:
-							break;
+						}
+						break;
+					case 'order':
+					case 'usertrade':
+					case 'wallet':
+					case 'deposit':
+					case 'withdrawal':
+					case 'admin':
+						this.ws.send(
+							JSON.stringify({
+								op: 'subscribe',
+								args: [topic]
+							})
+						);
+						if (!this.initialConnection) {
+							this.wsEvents = union(this.wsEvents, [event]);
+						}
+						break;
+					default:
+						break;
 					}
 				}
 			});
@@ -3255,40 +3333,40 @@ class HollaExKit {
 				if (this.wsEvents.includes(event)) {
 					const [topic, symbol] = event.split(':');
 					switch (topic) {
-						case 'orderbook':
-						case 'trade':
-							if (symbol) {
-								this.ws.send(
-									JSON.stringify({
-										op: 'unsubscribe',
-										args: [`${topic}:${symbol}`]
-									})
-								);
-							} else {
-								this.ws.send(
-									JSON.stringify({
-										op: 'unsubscribe',
-										args: [topic]
-									})
-								);
-							}
-							this.wsEvents = this.wsEvents.filter((e) => e !== event);
-							break;
-						case 'order':
-						case 'wallet':
-						case 'deposit':
-						case 'withdrawal':
-						case 'admin':
+					case 'orderbook':
+					case 'trade':
+						if (symbol) {
+							this.ws.send(
+								JSON.stringify({
+									op: 'unsubscribe',
+									args: [`${topic}:${symbol}`]
+								})
+							);
+						} else {
 							this.ws.send(
 								JSON.stringify({
 									op: 'unsubscribe',
 									args: [topic]
 								})
 							);
-							this.wsEvents = this.wsEvents.filter((e) => e !== event);
-							break;
-						default:
-							break;
+						}
+						this.wsEvents = this.wsEvents.filter((e) => e !== event);
+						break;
+					case 'order':
+					case 'wallet':
+					case 'deposit':
+					case 'withdrawal':
+					case 'admin':
+						this.ws.send(
+							JSON.stringify({
+								op: 'unsubscribe',
+								args: [topic]
+							})
+						);
+						this.wsEvents = this.wsEvents.filter((e) => e !== event);
+						break;
+					default:
+						break;
 					}
 				}
 			});
