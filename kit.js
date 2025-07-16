@@ -969,6 +969,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -1090,6 +1091,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -1631,6 +1633,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -1866,6 +1869,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 		if (params.length > 1) path += params;
@@ -2194,6 +2198,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -2314,6 +2319,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -2553,6 +2559,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format) && ['csv', 'all'].includes(opts.format)) {
+			path += '/csv';
 			path += `&format=${opts.format}`;
 		}
 
@@ -2746,6 +2753,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
@@ -3087,6 +3095,7 @@ class HollaExKit {
 		}
 
 		if (isString(opts.format)) {
+			path += '/csv';
 			params += `&format=${opts.format}`;
 		}
 
