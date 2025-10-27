@@ -3297,6 +3297,7 @@ class HollaExKit {
 							}
 						}
 						break;
+					case 'price':
 					case 'order':
 					case 'usertrade':
 					case 'wallet':
@@ -3352,6 +3353,7 @@ class HollaExKit {
 						}
 						this.wsEvents = this.wsEvents.filter((e) => e !== event);
 						break;
+					case 'price':
 					case 'order':
 					case 'wallet':
 					case 'deposit':
