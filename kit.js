@@ -2868,6 +2868,7 @@ class HollaExKit {
 	 * @param {number} id - ID of the stake pool to update
 	 * @param {object} opts - Optional parameters
 	 * @param {string} opts.name - Name of the stake pool 
+	 * @param {string} opts.category - Category of the stake pool
 	 * @param {number} opts.user_id - User ID associated with the stake pool
 	 * @param {string} opts.currency - Currency of the stake pool
 	 * @param {string} opts.reward_currency - Currency for rewards
@@ -2889,6 +2890,7 @@ class HollaExKit {
 		id,
 		opts = {
 			name: null,
+			category: null,
 			user_id: null,
 			currency: null,
 			reward_currency: null,
@@ -2913,6 +2915,10 @@ class HollaExKit {
 		// Optional parameters
 		if (isString(opts.name)) {
 			data.name = opts.name;
+		}
+
+		if (isString(opts.category)) {
+			data.category = opts.category;
 		}
 
 		if (isNumber(opts.user_id)) {
@@ -3108,6 +3114,51 @@ class HollaExKit {
 			this.apiExpiresAfter
 		);
 		return createRequest(verb, `${this.apiUrl}${path}`, headers);
+	}
+
+	/**
+	 * Update exchange staker values for admin
+	 * @param {number} id - ID of the staker entry to update
+	 * @param {object} opts - Optional parameters
+	 * @param {number} opts.nav - Net asset value
+	 * @param {number} opts.reward - Reward amount
+	 * @param {string} opts.status - Staker status (staking/unstaking/closed)
+	 * @return {object} A JSON object with the updated staker
+	 */
+	updateExchangeStakerByAdmin(
+		id,
+		opts = {
+			nav: null,
+			reward: null,
+			status: null
+		}
+	) {
+		const verb = 'PUT';
+		const path = `${this.baseUrl}/admin/staker`;
+		const data = { id };
+
+		// Optional parameters
+		if (isNumber(opts.nav)) {
+			data.nav = opts.nav;
+		}
+
+		if (isNumber(opts.reward)) {
+			data.reward = opts.reward;
+		}
+
+		if (isString(opts.status)) {
+			data.status = opts.status;
+		}
+
+		const headers = generateHeaders(
+			this.headers,
+			this.apiSecret,
+			verb,
+			path,
+			this.apiExpiresAfter,
+			data
+		);
+		return createRequest(verb, `${this.apiUrl}${path}`, headers, { data });
 	}
 
 	/**
