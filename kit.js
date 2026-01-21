@@ -3354,6 +3354,7 @@ class HollaExKit {
 					case 'wallet':
 					case 'deposit':
 					case 'withdrawal':
+					case 'stake':
 					case 'admin':
 						this.ws.send(
 							JSON.stringify({
@@ -3409,6 +3410,7 @@ class HollaExKit {
 					case 'wallet':
 					case 'deposit':
 					case 'withdrawal':
+					case 'stake':
 					case 'admin':
 						this.ws.send(
 							JSON.stringify({

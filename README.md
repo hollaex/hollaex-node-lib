@@ -166,11 +166,13 @@ Here is the list of channels you can subscribe to:
 
 - `orderbook` (Available publicly)
 - `trade` (Available publicly)
+- `price` (Available publicly. Receive asset price updates)
 - `order` (Only available with authentication. Receive order updates)
 - `usertrade` (Only available with authentication. Receive user trades)
 - `wallet` (Only available with authentication. Receive balance updates)
 - `deposit` (Only available with authentication. Receive deposit notifications)
 - `withdrawal` (Only available with authentication. Receive withdrawal notifications)
+- `stake` (Only available with authentication. Receive staking updates)
 - `admin` (Only available with authentication for the exchange administrator. Receive exchange operations such as deposits and withdrawals of all users)
 
 
@@ -230,6 +232,63 @@ These are exapmles of data responses from the server.
 			...
 		],
 		"time": 1608015328
+	}
+	```
+
+- **price**: Public asset price updates.
+
+  - `partial`: Snapshot of all asset prices.
+
+	```json
+	{
+		"topic": "price",
+		"action": "partial",
+		"data": {
+			"usdt": {
+				"price": 1.0007337033020485,
+				"lastUpdate": "2025-12-02T20:39:36.106Z"
+			},
+			"btc": {
+				"price": 88894.87428027151,
+				"lastUpdate": "2026-01-21T01:30:02.528Z"
+			},
+			"bch": {
+				"price": 580.8388162627956,
+				"lastUpdate": "2026-01-21T01:30:02.458Z"
+			},
+			"xmr": {
+				"price": 500.15115600048426,
+				"lastUpdate": "2026-01-21T01:30:02.553Z"
+			},
+			"xht": {
+				"price": 0.2475,
+				"lastUpdate": "2026-01-20T16:00:08.265Z"
+			},
+			"xrp": {
+				"price": 1.90604457302926,
+				"lastUpdate": "2026-01-21T01:30:02.569Z"
+			},
+			"eth": {
+				"price": 4000,
+				"lastUpdate": "2026-01-21T01:40:47.510Z"
+			}
+		},
+		"time": 1768960063
+	}
+	```
+
+  - `update`: Price update for a single asset.
+
+	```json
+	{
+		"topic": "price",
+		"action": "update",
+		"symbol": "eth",
+		"data": {
+			"price": 4000,
+			"lastUpdate": "2026-01-21T01:50:19.501Z"
+		},
+		"time": 1768960220
 	}
 	```
 
@@ -399,6 +458,64 @@ These are exapmles of data responses from the server.
 			...
 		},
 		"time": 1608021684
+	}
+	```
+
+- **stake**: Updates related to the user's staking activity are as follows:
+
+  - `insert`: New stake creation.
+
+	```json
+	{
+		"topic": "stake",
+		"action": "insert",
+		"user_id": 2976,
+		"user_network_id": 15334,
+		"data": {
+			"reward": 0,
+			"slashed": 0,
+			"id": 28,
+			"user_id": 2976,
+			"stake_id": 7,
+			"amount": 0.5,
+			"nav": 0.5,
+			"currency": "eth",
+			"reward_currency": "eth",
+			"status": "staking",
+			"updated_at": "2026-01-21T01:26:31.449Z",
+			"created_at": "2026-01-21T01:26:31.449Z",
+			"closing": null,
+			"unstaked_date": null
+		},
+		"time": 1768958791
+	}
+	```
+
+  - `delete`: Stake removal.
+
+	```json
+	{
+		"topic": "stake",
+		"action": "delete",
+		"user_id": 2976,
+		"user_network_id": 15334,
+		"data": {
+			"id": 28,
+			"user_id": 2976,
+			"stake_id": 7,
+			"amount": 0.5,
+			"nav": 0.5,
+			"currency": "eth",
+			"reward_currency": "eth",
+			"reward": 0,
+			"slashed": 0,
+			"status": "unstaking",
+			"closing": null,
+			"unstaked_date": "2026-01-21T01:31:18.866Z",
+			"created_at": "2026-01-21T01:26:31.449Z",
+			"updated_at": "2026-01-21T01:31:18.867Z"
+		},
+		"time": 1768959078
 	}
 	```
 
